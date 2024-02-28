@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from '../../components/header/header';
 import CardPlace from '../../components/card-data/card-place';
 

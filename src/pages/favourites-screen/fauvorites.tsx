@@ -1,4 +1,3 @@
-import React from 'react';
 import CardPlace from '../../components/card-data/card-place';
 
 function Favourites():JSX.Element{

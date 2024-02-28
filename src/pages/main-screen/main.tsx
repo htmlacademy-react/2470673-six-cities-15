@@ -1,5 +1,3 @@
-import React from 'react';
-import locations from '../../components/locations card/locations';
 import CardPlace from '../../components/card-data/card-place';
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
