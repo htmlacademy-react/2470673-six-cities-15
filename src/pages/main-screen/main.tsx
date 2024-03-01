@@ -12,7 +12,7 @@ function Main({placesCount}:AppPageProps):JSX.Element{
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-        <section className="locations container">
+          <section className="locations container">
             <ul className="locations__list tabs__list">
               <li className="locations__item">
                 <a className="locations__item-link tabs__item" href="#">
