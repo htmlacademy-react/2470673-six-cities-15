@@ -12,6 +12,7 @@ function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
+
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -85,6 +86,7 @@ function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">{cardHoverId}</section>
+
             </div>
           </div>
         </div>
@@ -94,3 +96,4 @@ function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
 }
 
 export default MainPage;
+

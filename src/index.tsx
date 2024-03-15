@@ -13,5 +13,6 @@ root.render(
   <React.StrictMode>
     <h1>Hello, World!</h1>
     <App placesCount={Setting.PlacesCount} offers={offers} reviews={reviews}></App>
+
   </React.StrictMode>
 );

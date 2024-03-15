@@ -20,3 +20,4 @@ function CitiesPlacesList({offerList, setCardHoverId}: CitiesPlacesListProps): J
 }
 
 export default CitiesPlacesList;
+

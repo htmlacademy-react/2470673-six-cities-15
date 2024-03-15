@@ -57,6 +57,7 @@ function App({placesCount,offers,reviews}:AppPageProps):JSX.Element{
             path="*"
             element={<NotFoundPage />}
           />
+
         </Route>
       </Routes>
     </BrowserRouter>

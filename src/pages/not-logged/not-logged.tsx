@@ -159,6 +159,7 @@ function NotLogged():JSX.Element{
         </section>
       </div>
     </main>
+
   );
 }
 export default NotLogged;
