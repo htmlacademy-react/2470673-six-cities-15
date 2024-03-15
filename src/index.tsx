@@ -5,6 +5,7 @@ import { Setting } from './components/const/const';
 import { offers } from './moks/offers';
 import { reviews } from './moks/reviews';
 
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
