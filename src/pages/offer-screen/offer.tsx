@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Offers, Reviews } from '../../components/types/types';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import { AuthorizationStatus } from '../../components/const/const';
 
 type OfferPageProps={
   offers:Offers;
