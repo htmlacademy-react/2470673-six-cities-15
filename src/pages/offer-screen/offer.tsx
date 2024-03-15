@@ -20,10 +20,7 @@ function OfferPage({offers,reviews,onReview}:OfferPageProps):JSX.Element{
 
   return(
 
-    <main className="page__main page__main--offer">
-      <section className="offer">
-        <div className="offer__gallery-container container">
-          <div className="offer__gallery">
+
             {images.map((url, id) => {
               const keyValue = `${id}-${url}`;
               return (
@@ -32,6 +29,7 @@ function OfferPage({offers,reviews,onReview}:OfferPageProps):JSX.Element{
                 </div>
               );
             })}
+
           </div>
         </div>
         <div className="offer__container container">
@@ -47,6 +45,7 @@ function OfferPage({offers,reviews,onReview}:OfferPageProps):JSX.Element{
               </h1>
               <button className="offer__bookmark-button button" type="button">
                 <svg className={`offer__bookmark-icon ${isFavorite ? 'offer__bookmark-button--active' : ''}`} width={31} height={33}>
+
                   <use xlinkHref="#icon-bookmark"></use>
                 </svg>
                 <span className="visually-hidden">To bookmarks</span>
@@ -70,6 +69,7 @@ function OfferPage({offers,reviews,onReview}:OfferPageProps):JSX.Element{
             </ul>
             <div className="offer__price">
               <b className="offer__price-value">€{price}</b>
+
               <span className="offer__price-text">&nbsp;night</span>
             </div>
             <div className="offer__inside">
@@ -79,6 +79,7 @@ function OfferPage({offers,reviews,onReview}:OfferPageProps):JSX.Element{
                   const keyValue = good;
                   return (<li key = {keyValue} className="offer__inside-item">{good}</li>);
                 })}
+
               </ul>
             </div>
             <div className="offer__host">
@@ -89,6 +90,7 @@ function OfferPage({offers,reviews,onReview}:OfferPageProps):JSX.Element{
                 </div>
                 <span className="offer__user-name">{name}</span>
                 <span className="offer__user-status">{isPro ? 'Pro' : ''}</span>
+
               </div>
               <div className="offer__description">
                 <p className="offer__text">
@@ -101,6 +103,7 @@ function OfferPage({offers,reviews,onReview}:OfferPageProps):JSX.Element{
             </div>
             {}
             <ReviewsList reviews = {reviews} onReview = {onReview}/>
+
           </div>
         </div>
         <section className="offer__map map"></section>
@@ -214,3 +217,4 @@ function OfferPage({offers,reviews,onReview}:OfferPageProps):JSX.Element{
   );
 }
 export default OfferPage;
+

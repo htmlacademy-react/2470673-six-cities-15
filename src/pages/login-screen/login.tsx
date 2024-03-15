@@ -3,6 +3,7 @@ function LoginPage(): JSX.Element {
   return (
     <div className="page page--gray page--login">
 
+
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -44,6 +45,7 @@ function LoginPage(): JSX.Element {
               >
                 Sign in
               </button>
+
             </form>
           </section>
           <section className="locations locations--login locations--current">
@@ -55,6 +57,7 @@ function LoginPage(): JSX.Element {
                 <span>
                   Amsterdam
                 </span>
+
               </a>
             </div>
           </section>

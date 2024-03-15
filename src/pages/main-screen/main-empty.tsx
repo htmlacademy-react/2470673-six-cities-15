@@ -33,6 +33,7 @@ function MainEmptyPage(): JSX.Element {
           </div>
         </div>
       </header>
+
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -68,6 +69,7 @@ function MainEmptyPage(): JSX.Element {
                   className="locations__item-link tabs__item tabs__item--active"
                   href="#"
                 >
+
                   <span>Dusseldorf</span>
                 </a>
               </li>

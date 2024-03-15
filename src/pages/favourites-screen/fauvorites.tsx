@@ -88,3 +88,4 @@ function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
 }
 
 export default FavoritesPage;
+
