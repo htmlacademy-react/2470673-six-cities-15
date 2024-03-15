@@ -21,6 +21,11 @@ function OfferPage({offers,reviews,onReview}:OfferPageProps):JSX.Element{
   return(
 
 
+    <main className="page__main page__main--offer">
+      <section className="offer">
+        <div className="offer__gallery-container container">
+          <div className="offer__gallery">
+
             {images.map((url, id) => {
               const keyValue = `${id}-${url}`;
               return (

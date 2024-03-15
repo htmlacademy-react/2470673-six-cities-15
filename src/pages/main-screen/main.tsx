@@ -96,3 +96,4 @@ function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
 }
 
 export default MainPage;
+
