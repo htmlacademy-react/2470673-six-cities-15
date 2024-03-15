@@ -1,14 +1,18 @@
-import CardPlace from '../../components/card-data/card-place';
-import Header from '../../components/header/header';
-import Footer from '../../components/footer/footer';
+import { useState } from 'react';
+import { Offers } from '../../components/types/types';
+import CitiesPlacesList from '../../components/card-data/card-place';
 
-type AppPageProps={
-  placesCount:number;
+type MainPageProps = {
+  placesCount: number;
+  offers: Offers;
 }
 
-function Main({placesCount}:AppPageProps):JSX.Element{
-  return(
-    <><Header></Header>
+function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
+  const [cardHoverId, setCardHoverId] = useState<string | null>(null);
+
+  return (
+    <div className="page page--gray page--main">
+
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -56,28 +60,39 @@ function Main({placesCount}:AppPageProps):JSX.Element{
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
                   Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
+                  <svg className="places__sorting-arrow" width={7} height={4}>
+                    <use xlinkHref="#icon-arrow-select" />
                   </svg>
                 </span>
                 <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
+                  <li
+                    className="places__option places__option--active"
+                    tabIndex={0}
+                  >
+                    Popular
+                  </li>
+                  <li className="places__option" tabIndex={0}>
+                    Price: low to high
+                  </li>
+                  <li className="places__option" tabIndex={0}>
+                    Price: high to low
+                  </li>
+                  <li className="places__option" tabIndex={0}>
+                    Top rated first
+                  </li>
                 </ul>
               </form>
-              <CardPlace></CardPlace>
+              <CitiesPlacesList offerList = {offers} setCardHoverId = {setCardHoverId}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">{cardHoverId}</section>
+
             </div>
           </div>
         </div>
       </main>
-      <Footer></Footer>
-    </>
+    </div>
   );
 }
 
-export default Main;
+export default MainPage;
