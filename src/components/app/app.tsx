@@ -9,25 +9,29 @@ import PrivateRoute from '../privateRoute';
 import { getAuthorizationStatus } from '../authorizationStatus';
 import FavoritesPage from '../../pages/favourites-screen/fauvorites';
 import { Offers, Reviews } from '../types/types';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 type AppPageProps={
     placesCount:number;
     offers:Offers;
     reviews:Reviews;
+    nearbyOffers:Offers;
+    citiesList:string[];
 }
 
 
-function App({placesCount,offers,reviews}:AppPageProps):JSX.Element{
+function App({placesCount,offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
   const AuthorizationStatus = getAuthorizationStatus();
   return(
     <BrowserRouter>
+      <ScrollToTop></ScrollToTop>
       <Routes>
         <Route path={AppRoutes.Main} element={<Layout></Layout>}>
 
 
           <Route
             index
-            element={<MainPage placesCount={placesCount} offers = {offers} />}
+            element={<MainPage placesCount={placesCount} offers = {offers} citiesList={citiesList} />}
           />
           <Route
             path={AppRoutes.Favorites}
@@ -46,7 +50,7 @@ function App({placesCount,offers,reviews}:AppPageProps):JSX.Element{
           <Route
             path={AppRoutes.Offer}
             element={
-              <OfferPage offers = {offers} reviews = {reviews}
+              <OfferPage offers = {offers} reviews = {reviews} nearbyOffers ={nearbyOffers}
                 onReview={(rating, comment) => {
                   console.log(rating, comment);
                 }}

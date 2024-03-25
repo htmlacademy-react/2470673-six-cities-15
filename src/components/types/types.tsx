@@ -8,6 +8,8 @@ export type Host = {
     isPro: boolean;
     avatarUrl: string;
   };
+
+
 export type Location = {
     latitude: number;
     longitude: number;
@@ -46,3 +48,17 @@ export type User = {
   };
 export type Reviews = Review[];
 export type Offers = Offer[];
+export type Card = 'cities' | 'favorite' | 'offers';
+
+export type CityMap = {
+  title: string;
+  lat: number;
+  lng: number;
+  zoom: number;
+}
+
+export type Point = {
+  title: string;
+  lat: number;
+  lng: number;
+}
