@@ -10,6 +10,7 @@ import { city } from '../../moks/cityMap.ts';
 type OfferPageProps={
   offers:Offers;
   reviews:Reviews;
+  nearbyOffers: Offers;
   onReview:(rating:string,comment:string)=>void;
 }
 

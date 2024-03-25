@@ -7,7 +7,9 @@ import Mappage from '../../components/map/map.tsx';
 import { city } from '../../moks/cityMap.ts';
 type MainPageProps = {
   placesCount: number;
-  offers: Offers;
+  offers: Offers; 
+  citiesList: string[];
+
 }
 
 function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
