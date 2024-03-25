@@ -64,7 +64,7 @@ function App({placesCount,offers,nearbyOffers,citiesList,reviews}:AppPageProps):
 
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter>   
   );
 }
 export default App;
