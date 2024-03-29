@@ -1,7 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {setCityActive, getOffers, setChangeMap} from './action';
 import { offers } from '../../moks/offers';
-import { DEFAULT_CITY,defaultLocation } from '../const/const'; 
+import { DEFAULT_CITY,defaultLocation } from '../const/const';
 
 const initialState = {
   cityActive: DEFAULT_CITY,

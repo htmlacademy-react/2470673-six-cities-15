@@ -4,7 +4,7 @@ export type City = {
     name: string;
     location: Location;
   };
-  export type CityList = {
+export type CityList = {
     Paris: string;
     Cologne: string;
     Brussels: string;

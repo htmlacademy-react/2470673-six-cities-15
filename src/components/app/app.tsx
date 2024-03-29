@@ -30,7 +30,7 @@ function App({offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
 
           <Route
             index
-            element={<MainPage  citiesList={citiesList} />}
+            element={<MainPage citiesList={citiesList} />}
           />
           <Route
             path={AppRoutes.Favorites}
@@ -63,7 +63,7 @@ function App({offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
 
         </Route>
       </Routes>
-    </BrowserRouter>   
+    </BrowserRouter>
   );
 }
 export default App;

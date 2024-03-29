@@ -40,7 +40,7 @@ function OfferPage({offers, nearbyOffers, reviews, onReview}: OfferPageProps): J
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-        
+
             </div>
           </div>
         </div>
