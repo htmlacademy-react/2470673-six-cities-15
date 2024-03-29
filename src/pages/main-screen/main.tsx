@@ -1,33 +1,38 @@
-import { useState } from 'react';
-import { Offers } from '../../components/types/types';
+import {useState} from 'react';
+import { useAppSelector } from '../../components/hooks/reduxIndex.ts';
+import Map from '../../components/map/map';
 import CardMainList from '../../components/cardMainList/card-main-list';
-import Locations from '../../components/locations/locations';
-import { citiesList } from '../../components/const/const';
-import Mappage from '../../components/map/map.tsx';
-import { city } from '../../moks/cityMap.ts';
-type MainPageProps = {
-  placesCount: number;
-  offers: Offers; 
-  citiesList: string[];
+import Locations from '../../components/locations/locations.tsx';
 
+type MainPageProps = {
+  citiesList: string[];
 }
 
-function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
+function MainPage({citiesList}: MainPageProps): JSX.Element {
   const [cardHoverId, setCardHoverId] = useState<string | null>(null);
+  const cityActive = useAppSelector((state) => state.cityActive);
+  const offersActive = useAppSelector((state) => state.offers);
+  const cityMapActive = useAppSelector((state) => state.city);
+  const placesCount = offersActive.length;
 
   return (
     <div className="page page--gray page--main">
-
+      <header className="header">
+        <div className="container">
+          <div className="header__wrapper">
+            <div className="header__left">
+            </div>
+          </div>
+        </div>
+      </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <Locations cities={citiesList}></Locations>
-        </div>
+        <Locations cities = {citiesList}/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesCount} places to stay in Amsterdam</b>
+              <b className="places__found">{placesCount} places to stay in {cityActive}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -54,11 +59,12 @@ function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <CardMainList elementType = {'cities'} setActivePlaceCard={setCardHoverId} offers={offers}/>
+              <div className="cities__places-list places__list tabs__content">
+                <CardMainList elementType={'cities'} offers = {offersActive} setActivePlaceCard = {setCardHoverId}/>
+              </div>
             </section>
             <div className="cities__right-section">
-              <Mappage mapType={'offer'} offers={offers} cardHoverId={cardHoverId} city={city}/>
-
+              <Map mapType={'cities'} offers={offersActive} cardHoverId={cardHoverId} city={cityMapActive}/>
             </div>
           </div>
         </div>
@@ -68,4 +74,3 @@ function MainPage({placesCount, offers}: MainPageProps): JSX.Element {
 }
 
 export default MainPage;
-

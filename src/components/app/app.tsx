@@ -12,15 +12,14 @@ import { Offers, Reviews } from '../types/types';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 
 type AppPageProps={
-    placesCount:number;
-    offers:Offers;
-    reviews:Reviews;
-    nearbyOffers:Offers;
-    citiesList:string[];
+  offers: Offers;
+  nearbyOffers: Offers;
+  reviews: Reviews;
+  citiesList: string[];
 }
 
 
-function App({placesCount,offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
+function App({offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
   const AuthorizationStatus = getAuthorizationStatus();
   return(
     <BrowserRouter>
@@ -31,7 +30,7 @@ function App({placesCount,offers,nearbyOffers,citiesList,reviews}:AppPageProps):
 
           <Route
             index
-            element={<MainPage placesCount={placesCount} offers = {offers} citiesList={citiesList} />}
+            element={<MainPage  citiesList={citiesList} />}
           />
           <Route
             path={AppRoutes.Favorites}

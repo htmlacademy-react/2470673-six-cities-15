@@ -1,7 +1,16 @@
+import {store} from '../store/index';
 
 export type City = {
     name: string;
     location: Location;
+  };
+  export type CityList = {
+    Paris: string;
+    Cologne: string;
+    Brussels: string;
+    Amsterdam: string;
+    Hamburg: string;
+    Dusseldorf: string;
   };
 export type Host = {
     name: string;
@@ -56,9 +65,12 @@ export type CityMap = {
   lng: number;
   zoom: number;
 }
-
 export type Point = {
   title: string;
   lat: number;
   lng: number;
 }
+
+export type State = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
