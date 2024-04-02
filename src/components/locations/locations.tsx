@@ -1,9 +1,22 @@
+import { useAppDispatch,useAppSelector } from '../hooks/reduxIndex';
+import { setCityActive,setChangeMap,getOffers } from '../store/action';
+import { cityMap } from '../const/const';
 
-type LocationsListProps = {
-    cities: string[];
+type LocationsProps = {
+  cities: string[];
+}
+
+function Locations({cities}: LocationsProps): JSX.Element {
+  const cityActive = useAppSelector((state) => state.cityActive);
+  const dispatch = useAppDispatch();
+
+  function changeCity (city:string) {
+    const [cityMapActive] = cityMap.filter((item) => item.title === city);
+
+    dispatch(setCityActive(city));
+    dispatch(getOffers());
+    dispatch(setChangeMap(cityMapActive));
   }
-
-function Locations({cities}: LocationsListProps): JSX.Element {
 
   return (
     <div className="tabs">
@@ -13,7 +26,9 @@ function Locations({cities}: LocationsListProps): JSX.Element {
             const keyValue = city;
             return (
               <li key = {keyValue} className="locations__item">
-                <a className={`locations__item-link tabs__item ${city === 'Amsterdam' ? 'tabs__item--active' : ''}`} href="#">
+                <a className={`locations__item-link tabs__item ${city === cityActive ? 'tabs__item--active' : ''}`}
+                  onClick={()=>changeCity(city)} href="#"
+                >
                   <span>{city}</span>
                 </a>
               </li>
