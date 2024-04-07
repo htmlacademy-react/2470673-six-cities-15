@@ -16,6 +16,7 @@ type MapProps = {
   cardHoverId: Offer['id'] | null;
 }
 
+
 const defaultCustomIcon = leaflet.icon({
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [40, 40],
