@@ -1,5 +1,26 @@
+import {useRef, FormEvent} from 'react';
+import {useNavigate} from 'react-router-dom';
+import { useAppDispatch } from '../../components/hooks/reduxIndex';
+import { loginAction } from '../../components/store/api-actions';
+import { AppRoutes } from '../../components/const/const';
 
 function LoginPage(): JSX.Element {
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      dispatch(loginAction({
+        login: loginRef.current.value,
+        password: passwordRef.current.value
+      }));
+    }
+  };
   return (
     <div className="page page--gray page--login">
 
@@ -14,12 +35,14 @@ function LoginPage(): JSX.Element {
               action="#"
               className="login__form form"
               method="post"
+              onSubmit={handleSubmit}
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">
                   E-mail
                 </label>
                 <input
+                  ref={loginRef}
                   className="login__input form__input"
                   name="email"
                   placeholder="Email"
@@ -32,6 +55,7 @@ function LoginPage(): JSX.Element {
                   Password
                 </label>
                 <input
+                  ref={passwordRef}
                   className="login__input form__input"
                   name="password"
                   placeholder="Password"
@@ -40,6 +64,7 @@ function LoginPage(): JSX.Element {
                 />
               </div>
               <button
+                onClick={() => navigate(AppRoutes.Main)}
                 className="login__submit form__submit button"
                 type="submit"
               >

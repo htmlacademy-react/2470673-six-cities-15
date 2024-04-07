@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { AppRoutes, AuthorizationStatus } from '../const/const';
+import { AppRoutes, AuthorizationStatuss } from '../const/const';
 import { getAuthorizationStatus } from '../authorizationStatus';
 const getLayoutState = (pathname:AppRoutes) => {
   let rootClassName = '';
@@ -43,7 +43,7 @@ function Layout():JSX.Element{
                     <a className="header__nav-link header__nav-link--profile" href="#">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      {authorizationStatus === AuthorizationStatus.Auth ? (
+                      {authorizationStatus === AuthorizationStatuss.Auth ? (
                         <>
                           <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                           <span className="header__favorite-count">0</span>
@@ -52,7 +52,7 @@ function Layout():JSX.Element{
 
                     </a>
                   </li>
-                  {authorizationStatus === AuthorizationStatus.Auth ? (
+                  {authorizationStatus === AuthorizationStatuss.Auth ? (
                     <li className="header__nav-item">
                       <a className="header__nav-link" href="#">
                         <span className="header__signout">Sign out</span>

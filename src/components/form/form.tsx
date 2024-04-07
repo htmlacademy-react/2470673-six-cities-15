@@ -1,6 +1,6 @@
 import {useState, ChangeEvent, Fragment, FormEvent} from 'react';
 import { getAuthorizationStatus } from '../authorizationStatus';
-import { AuthorizationStatus } from '../const/const';
+import {AuthorizationStatuss } from '../const/const';
 
 type FormProps = {
   onReview: (rating: string, comment: string) => void;
@@ -35,7 +35,7 @@ function Form({onReview}: FormProps): JSX.Element {
       }}
     >
 
-      {authorizationStatus === AuthorizationStatus.Auth ? (
+      {authorizationStatus === AuthorizationStatuss.Auth ? (
 
         <div>
           <label className="reviews__label form__label" htmlFor="review">
