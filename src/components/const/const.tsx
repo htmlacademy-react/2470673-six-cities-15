@@ -10,7 +10,7 @@ export enum AppRoutes{
   Offer='/offer/:id',
   Favorites='/favorites'
 }
-export enum AuthorizationStatus{
+export enum AuthorizationStatuss{
   Auth='Auth',
   NoAuth='NoAuth',
   Unknown='Unknown'
@@ -78,3 +78,18 @@ export const cityMap: CityMap[] = [
 ];
 
 export const [defaultLocation] = cityMap.filter((item) => item.title === DEFAULT_CITY);
+
+export enum ApiRoute {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Comments = '/comments/',
+  Login = '/login',
+  Logout = '/logout'
+}
+export enum SortType {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRated = 'Top rated first',
+}
+export const TIMEOUT_SHOW_ERROR = 2000;

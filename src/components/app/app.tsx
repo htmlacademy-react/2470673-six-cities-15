@@ -6,11 +6,12 @@ import OfferPage from '../../pages/offer-screen/offer';
 import NotFoundPage from '../../pages/notfound/notfound';
 import Layout from '../layout/layout';
 import PrivateRoute from '../privateRoute';
-import { getAuthorizationStatus } from '../authorizationStatus';
 import FavoritesPage from '../../pages/favourites-screen/fauvorites';
 import { Offers, Reviews } from '../types/types';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
-
+import { useAppSelector} from '../hooks/reduxIndex';
+import { AuthorizationStatuss } from '../const/const';
+import Spinner from '../spinner/spinner';
 type AppPageProps={
   offers: Offers;
   nearbyOffers: Offers;
@@ -20,7 +21,16 @@ type AppPageProps={
 
 
 function App({offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
-  const AuthorizationStatus = getAuthorizationStatus();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.offersIsLoading);
+
+
+  if (authorizationStatus === AuthorizationStatuss.Unknown || isOffersDataLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
   return(
     <BrowserRouter>
       <ScrollToTop></ScrollToTop>
@@ -36,7 +46,7 @@ function App({offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
             path={AppRoutes.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus}
+                authorizationStatus={authorizationStatus}
               >
                 <FavoritesPage offers = {offers}/>
               </PrivateRoute>

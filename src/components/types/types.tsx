@@ -24,6 +24,15 @@ export type Location = {
     longitude: number;
     zoom: number;
   };
+export type AuthData = {
+    login: string;
+    password: string;
+  };
+export type UserData = {
+    id: number;
+    email: string;
+    token: string;
+  };
 export type Offer = {
     id: string;
     title: string;

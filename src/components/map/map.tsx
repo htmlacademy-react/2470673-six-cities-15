@@ -66,8 +66,13 @@ function Mappage({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, cardHoverId, mapType]);
+  }, [city, map, offers, cardHoverId, mapType]);
 
+  useEffect(() => {
+    if (map) {
+      map.setView([city.lat, city.lng], city.zoom);
+    }
+  }, [map, city]);
 
   return (
     <section
@@ -85,7 +90,7 @@ function Mappage({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
     >
     </section>
   );
-
 }
+
 
 export default Mappage;
