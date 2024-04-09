@@ -2,8 +2,6 @@ import CardMainList from '../../components/cardMainList/card-main-list';
 import { useAppSelector } from '../../components/hooks/reduxIndex';
 
 
-
-
 import Spinner from '../../components/spinner/spinner';
 import { getFavorites, getFavoritesIsLoading, getFavoritesIsNotFound } from '../../components/store/fauvorite-process/selectors';
 import FavoritesEmptyPage from './favourites-empty';

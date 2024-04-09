@@ -60,7 +60,6 @@ export enum NameSpace {
 }
 
 
-
 export enum FavoritesTriggerUpdate {
   Offers = 'UpdateOffers',
   Offer = 'UpdateOffer',

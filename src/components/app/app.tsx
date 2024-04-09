@@ -35,7 +35,7 @@ function App():JSX.Element{
 
           <Route
             index
-            element={<MainPage  />}
+            element={<MainPage />}
           />
           <Route
             path={AppRoutes.Favorites}

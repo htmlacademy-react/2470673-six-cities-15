@@ -60,9 +60,9 @@ export type Host = {
     isPro: boolean;
     avatarUrl: string;
   };
-  import { FavoritesTriggerUpdate } from '../const/const';
+import { FavoritesTriggerUpdate } from '../const/const';
 
-  export type FavoriteData = {
+export type FavoriteData = {
     offerId: string;
     status: number;
     triggerUpdate: FavoritesTriggerUpdate;
@@ -116,8 +116,6 @@ export type User = {
     isPro: boolean;
     name: string;
   };
-
-
 
 
 export type Offers = Offer[];

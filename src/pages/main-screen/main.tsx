@@ -24,7 +24,7 @@ function MainPage(): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
-  <main className="page__main page__main--index">
+      <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <Locations />
         {offersIsLoading && <Spinner />}
