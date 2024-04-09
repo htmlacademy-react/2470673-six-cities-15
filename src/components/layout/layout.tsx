@@ -3,10 +3,11 @@ import { useAppSelector,useAppDispatch } from '../hooks/reduxIndex';
 import { AuthorizationStatuss,AppRoutes,PRIVATE_ROUTES } from '../const/const';
 import styles from './layout.module.css';
 import { logoutAction } from '../store/api-actions';
+import { getAuthorizationStatus,getUser } from '../store/user-process/selectors';
 
 function Layout():JSX.Element{
-  const authorizationStatusActive = useAppSelector((state) => state.authorizationStatus);
-  const user = useAppSelector((state) => state.user);
+  const authorizationStatusActive = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUser);
   const shouldRenderUser = authorizationStatusActive === AuthorizationStatuss.Auth;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

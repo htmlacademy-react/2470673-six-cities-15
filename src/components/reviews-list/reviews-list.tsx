@@ -1,8 +1,9 @@
 import Form from '../form/form';
+import {Reviews} from '../types/types.ts';
 import ReviewItem from '../review-item/reviewItem';
-import { Reviews } from '../types/types';
-import { useAppSelector } from '../hooks/reduxIndex';
-import { AuthorizationStatuss } from '../const/const';
+import { useAppSelector } from '../hooks/reduxIndex.ts';
+import { AuthorizationStatuss } from '../const/const.tsx';
+import { getAuthorizationStatus } from '../authorizationStatus.tsx';
 
 type ReviewsListProps = {
   reviews: Reviews;
@@ -12,9 +13,10 @@ type ReviewsListProps = {
 function ReviewsList({reviews, offerId}: ReviewsListProps): JSX.Element {
   const DEFAULT_BEGIN = 0;
   const MAX_REVIEWS_LENGTH = 10;
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const maxReviews = reviews.slice(DEFAULT_BEGIN, Math.min(MAX_REVIEWS_LENGTH, reviews.length))
     .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+
   return (
     <section className="offer__reviews reviews">
       <div>

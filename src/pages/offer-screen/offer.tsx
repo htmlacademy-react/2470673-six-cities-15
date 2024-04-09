@@ -1,12 +1,16 @@
 import {useParams, Navigate} from 'react-router-dom';
-import {useState,useEffect} from 'react';
+import {useState, useEffect} from 'react';
+import Map from '../../components/map/map.tsx';
+import Spinner from '../../components/spinner/spinner';
+import { getCity } from '../../components/store/offers-process/selectors.ts';
+import CardMainList from '../../components/cardMainList/card-main-list.tsx';
 import { useAppSelector } from '../../components/hooks/reduxIndex.ts';
 import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
-import Map from '../../components/map/map.tsx';
-import CardMainList from '../../components/cardMainList/card-main-list.tsx';
-import { fetchOfferAction,fetchReviewsAction,fetchNearPlacesAction } from '../../components/store/api-actions.ts';
-import Spinner from '../../components/spinner/spinner.tsx';
+import { fetchOfferAction, fetchReviewsAction, fetchOffersNearbyAction } from '../../components/store/api-actions.ts';
 import { store } from '../../components/store/index.ts';
+import { getOffersNearby, getOffersNearbyIsLoading } from '../../components/store/offer-nearby-process/selector.ts';
+import { getOffer, getOfferIsLoading, getOfferIsNotFound } from '../../components/store/offer-process/selector.ts';
+import { getReviews } from '../../components/store/review-process/selectors.ts';
 import { AppRoutes } from '../../components/const/const.tsx';
 
 const DEFAULT_BEGIN = 0;
@@ -14,23 +18,24 @@ const MAX_IMAGES_SHOW = 6;
 const NEAR_PLACES_COUNT = 3;
 
 function OfferPage(): JSX.Element {
-  const cityMapActive = useAppSelector((state) => state.city);
+  const cityMapActive = useAppSelector(getCity);
   const params = useParams();
   const cardId = params.id;
 
   useEffect(() => {
     store.dispatch(fetchOfferAction(cardId));
     store.dispatch(fetchReviewsAction(cardId));
-    store.dispatch(fetchNearPlacesAction(cardId));
+    store.dispatch(fetchOffersNearbyAction(cardId));
   }, [cardId]);
 
 
-  const offerActive = useAppSelector((state) => state.offer);
-  const offerIsLoading = useAppSelector((state) => state.offerIsLoading);
-  const reviewsActive = useAppSelector((state) => state.reviews);
-  const offerIsNotFound = useAppSelector((state) => state.offerIsNotFound);
-  const nearbyOffers = useAppSelector((state) => state.nearPlaces);
-  const nearbyOffersIsLoading = useAppSelector((state) => state.nearPlacesIsLoading);
+  const offerActive = useAppSelector(getOffer);
+  const offerIsLoading = useAppSelector(getOfferIsLoading);
+  const reviewsActive = useAppSelector(getReviews);
+  const offerIsNotFound = useAppSelector(getOfferIsNotFound);
+  const nearbyOffers = useAppSelector(getOffersNearby);
+  const nearbyOffersIsLoading = useAppSelector(getOffersNearbyIsLoading);
+
 
   const [nearbyCardHoverId, setNearbyCardHoverId] = useState<string | null>(null);
 
@@ -44,18 +49,8 @@ function OfferPage(): JSX.Element {
     generalOffers.unshift(offerActive);
   }
 
-
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-
-            </div>
-          </div>
-        </div>
-      </header>
       <main className="page__main page__main--offer">
         {offerIsLoading && <Spinner />}
         {offerIsNotFound && <Navigate to={AppRoutes.NotFound} />}
@@ -161,9 +156,7 @@ function OfferPage(): JSX.Element {
                 {reviewsActive && (<ReviewsList reviews = {reviewsActive} offerId = {cardId} />)}
               </div>
             </div>
-            {generalOffers.length > 0 && (
-              <Map mapType='offer' offers={generalOffers} cardHoverId={nearbyCardHoverId} city={cityMapActive}/>
-            )}
+            <Map mapType='offer' offers={generalOffers} cardHoverId={nearbyCardHoverId} city={cityMapActive}/>
           </section>
         )}
         <div className="container">

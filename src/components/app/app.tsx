@@ -7,24 +7,18 @@ import NotFoundPage from '../../pages/notfound/notfound';
 import Layout from '../layout/layout';
 import PrivateRoute from '../privateRoute';
 import FavoritesPage from '../../pages/favourites-screen/fauvorites';
-import { Offers } from '../types/types';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { useAppSelector} from '../hooks/reduxIndex';
 import { AuthorizationStatuss } from '../const/const';
 import Spinner from '../spinner/spinner';
 import HistoryRouter from '../../hist-route/history-route';
 import browserHistory from '../../browser-hist';
-type AppPageProps={
-  offers: Offers;
+import { getAuthorizationStatus } from '../authorizationStatus';
+import { getOffersIsLoading } from '../store/offers-process/selectors';
 
-  citiesList: string[];
-}
-
-
-function App({offers,citiesList,}:AppPageProps):JSX.Element{
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isOffersDataLoading = useAppSelector((state) => state.offersIsLoading);
-
+function App():JSX.Element{
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isOffersDataLoading = useAppSelector(getOffersIsLoading);
 
   if (authorizationStatus === AuthorizationStatuss.Unknown || isOffersDataLoading) {
     return (
@@ -41,7 +35,7 @@ function App({offers,citiesList,}:AppPageProps):JSX.Element{
 
           <Route
             index
-            element={<MainPage citiesList={citiesList} />}
+            element={<MainPage  />}
           />
           <Route
             path={AppRoutes.Favorites}
@@ -49,7 +43,7 @@ function App({offers,citiesList,}:AppPageProps):JSX.Element{
               <PrivateRoute
                 authorizationStatus={authorizationStatus}
               >
-                <FavoritesPage offers = {offers}/>
+                <FavoritesPage/>
               </PrivateRoute>
             }
           />

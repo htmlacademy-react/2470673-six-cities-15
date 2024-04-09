@@ -1,8 +1,8 @@
 import {useState, ChangeEvent, Fragment, FormEvent} from 'react';
 import { getAuthorizationStatus } from '../authorizationStatus';
 import {AuthorizationStatuss } from '../const/const';
-import { useAppDispatch } from '../hooks/reduxIndex';
-import { submitCommentAction } from '../store/api-actions';
+import {useAppDispatch} from '../hooks/reduxIndex';
+import { submitReviewAction } from '../store/api-actions';
 type FormProps = {
   offerId?:string;
 };
@@ -36,7 +36,7 @@ function Form({offerId}: FormProps): JSX.Element {
 
     if (offerId && !isDisabled) {
       dispatch(
-        submitCommentAction({
+        submitReviewAction({
           id: offerId,
           comment: comment,
           rating: Number(rating),

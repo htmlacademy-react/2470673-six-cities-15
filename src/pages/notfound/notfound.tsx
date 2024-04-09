@@ -1,16 +1,16 @@
 import {Link} from 'react-router-dom';
-import { AppRoutes,cityMap } from '../../components/const/const';
+
+import { AppRoutes } from '../../components/const/const';
 import { useAppDispatch } from '../../components/hooks/reduxIndex';
-import { setCityActive,setChangeMap } from '../../components/store/action';
+import { setCityActive,setChangeMap } from '../../components/store/offers-process/offers-process';
+
 function NotFoundPage(): JSX.Element {
   const cityButton = 'Paris';
   const dispatch = useAppDispatch();
 
   function onCityButton (city:string) {
-    const [cityMapActive] = cityMap.filter((item) => item.title === city);
-
     dispatch(setCityActive(city));
-    dispatch(setChangeMap(cityMapActive));
+    dispatch(setChangeMap());
   }
 
   return (
