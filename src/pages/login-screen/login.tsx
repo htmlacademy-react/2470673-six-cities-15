@@ -1,32 +1,32 @@
 import {useRef, FormEvent} from 'react';
-import { setCityActive,setChangeMap } from '../../components/store/action';
+import { setCityActive,setChangeMap } from '../../components/store/offers-process/offers-process';
 import { useAppDispatch } from '../../components/hooks/reduxIndex';
 import { loginAction } from '../../components/store/api-actions';
-import { AppRoutes, cityMap } from '../../components/const/const';
+import { AppRoutes } from '../../components/const/const';
 import { Link } from 'react-router-dom';
 function LoginPage(): JSX.Element {
+  const cityButton = 'Amsterdam';
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const cityButton = 'Amsterdam';
   const dispatch = useAppDispatch();
 
   function onCityButton (city:string) {
-    const [cityMapActive] = cityMap.filter((item) => item.title === city);
-
     dispatch(setCityActive(city));
-    dispatch(setChangeMap(cityMapActive));
+    dispatch(setChangeMap());
   }
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-   
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value
       }));
     }
+
   };
+
   return (
     <div className="page page--gray page--login">
 
@@ -80,7 +80,7 @@ function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-            <Link
+              <Link
                 className="locations__item-link"
                 onClick={() =>
                   onCityButton(cityButton)}

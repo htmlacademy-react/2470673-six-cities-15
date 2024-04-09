@@ -1,23 +1,39 @@
-import { Offers } from '../../components/types/types';
 import CardMainList from '../../components/cardMainList/card-main-list';
+import { useAppSelector } from '../../components/hooks/reduxIndex';
 
-type FavoritesPageProps = {
-  offers: Offers;
-}
 
-function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
-  const favoriteCards = offers.filter((offer) => offer.isFavorite === true);
+import Spinner from '../../components/spinner/spinner';
+import { getFavorites, getFavoritesIsLoading, getFavoritesIsNotFound } from '../../components/store/fauvorite-process/selectors';
+import FavoritesEmptyPage from './favourites-empty';
+
+function FavoritesPage(): JSX.Element {
+  const favoriteCards = useAppSelector(getFavorites);
+  const favoritesIsLoading = useAppSelector(getFavoritesIsLoading);
+  const favoritesIsNotFound = useAppSelector(getFavoritesIsNotFound);
 
   return (
     <div className="page">
+      <header className="header">
+        <div className="container">
+          <div className="header__wrapper">
+            <div className="header__left">
+            </div>
+          </div>
+        </div>
+      </header>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              <CardMainList elementType={'favorite'} offers = {favoriteCards}/>
-            </ul>
-          </section>
+          {favoritesIsLoading && <Spinner />}
+          {(favoritesIsNotFound || !favoriteCards.length) ? (
+            <FavoritesEmptyPage />
+          ) : (
+            <section className="favorites">
+              <h1 className="favorites__title">Saved listing</h1>
+              <ul className="favorites__list">
+                <CardMainList elementType={'favorite'} offers = {favoriteCards}/>
+              </ul>
+            </section>
+          )}
         </div>
       </main>
       <footer className="footer container">
@@ -36,4 +52,3 @@ function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
 }
 
 export default FavoritesPage;
-

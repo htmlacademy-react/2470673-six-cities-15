@@ -1,4 +1,4 @@
-import { CityList, CityMap } from '../types/types';
+import { CityList, City } from '../types/types';
 
 export const Setting = {
   PlacesCount:312
@@ -8,13 +8,22 @@ export enum AppRoutes{
   Main='/',
   Login='/login',
   Offer='/offer/:id',
-  Favorites='/favorites'
+  Favorites='/favorites',
+  NotFound = '*'
 }
 export enum AuthorizationStatuss{
   Auth='Auth',
   NoAuth='NoAuth',
   Unknown='Unknown'
 }
+export const DEFAULT_LOCATION: City = {
+  name: 'Paris',
+  location: {
+    latitude: 48.85661,
+    longitude: 2.351499,
+    zoom: 13
+  }
+} as const;
 
 export const handleStars = (width: number) => `${String(Math.round(width) * 20)}%`;
 
@@ -41,54 +50,22 @@ export const DEFAULT_CITY = CITY_LIST.Paris;
 export const PRIVATE_ROUTES: readonly string[] = ['/favorites'];
 
 export enum NameSpace {
-  Offers = 'OFFERS',
+  Offer = 'OFFER',
+  OffersNearby = 'OFFERSNEARBY',
+  ErrorMessage = 'ERRORMESSAGE',
   Favorites = 'FAVORITES',
-  Reviews = 'REVIEWS',
   User = 'USER',
-  Data = 'DATA',
-  Error = 'ERROR'
+  Reviews = 'REVIEWS',
+  Offers = 'OFFERS',
 }
 
-export const cityMap: CityMap[] = [
-  {
-    title: 'Amsterdam',
-    lat: 52.37454,
-    lng: 4.897976,
-    zoom: 12
-  },
-  {
-    title: 'Paris',
-    lat: 48.85661,
-    lng: 2.351499,
-    zoom: 12
-  },
-  {
-    title: 'Cologne',
-    lat: 50.938361,
-    lng: 6.959974,
-    zoom: 12
-  },
-  {
-    title: 'Brussels',
-    lat: 50.846557,
-    lng:4.351697,
-    zoom: 12
-  },
-  {
-    title: 'Hamburg',
-    lat: 53.550341,
-    lng: 10.000654,
-    zoom: 12
-  },
-  {
-    title: 'Dusseldorf',
-    lat: 51.225402,
-    lng: 6.776314,
-    zoom: 12
-  },
-];
 
-export const [defaultLocation] = cityMap.filter((item) => item.title === DEFAULT_CITY);
+export enum FavoritesTriggerUpdate {
+  Offers = 'UpdateOffers',
+  Offer = 'UpdateOffer',
+  Favorites = 'UpdateFavorites',
+  Nearby = 'UpdateNearby',
+}
 
 export enum ApiRoute {
   Offers = '/offers',
@@ -104,3 +81,4 @@ export enum SortType {
   TopRated = 'Top rated first',
 }
 export const TIMEOUT_SHOW_ERROR = 2000;
+export const DEFAULT_SORT = SortType.Popular;

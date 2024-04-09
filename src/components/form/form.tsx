@@ -1,12 +1,13 @@
 import {useState, ChangeEvent, Fragment, FormEvent} from 'react';
 import { getAuthorizationStatus } from '../authorizationStatus';
 import {AuthorizationStatuss } from '../const/const';
-
+import {useAppDispatch} from '../hooks/reduxIndex';
+import { submitReviewAction } from '../store/api-actions';
 type FormProps = {
-  onReview: (rating: string, comment: string) => void;
+  offerId?:string;
 };
 
-function Form({onReview}: FormProps): JSX.Element {
+function Form({offerId}: FormProps): JSX.Element {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('0');
 
@@ -18,9 +19,33 @@ function Form({onReview}: FormProps): JSX.Element {
     'terribly': '1'
   };
   const authorizationStatus = getAuthorizationStatus();
+  const dispatch = useAppDispatch();
+
+
+  const isDisabled = (comment.length < 50 || comment.length > 300 || rating === null);
   function handleInputChange(evt: ChangeEvent<HTMLInputElement>) {
     setRating(evt.target.value);
   }
+  const resetForm = () => {
+    setComment('');
+    setRating('0');
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (offerId && !isDisabled) {
+      dispatch(
+        submitReviewAction({
+          id: offerId,
+          comment: comment,
+          rating: Number(rating),
+        })
+      );
+
+      resetForm();
+    }
+  };
 
   function handleTextAreaChange(evt: ChangeEvent<HTMLTextAreaElement>) {
     setComment(evt.target.value);
@@ -29,10 +54,7 @@ function Form({onReview}: FormProps): JSX.Element {
   return (
 
     <form className="reviews__form form" action="#" method="post"
-      onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-        evt.preventDefault();
-        onReview(rating, comment);
-      }}
+      onSubmit={handleSubmit}
     >
 
       {authorizationStatus === AuthorizationStatuss.Auth ? (
@@ -85,6 +107,7 @@ function Form({onReview}: FormProps): JSX.Element {
             <button
               className="reviews__submit form__submit button"
               type="submit"
+              disabled = {isDisabled}
             >
           Submit
             </button>

@@ -1,5 +1,48 @@
 import {store} from '../store/index';
+import { AuthorizationStatuss,SortType } from '../const/const';
+import { UserConnect } from './user';
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatuss;
+  user: UserConnect | null;
+};
 
+export type ErrorMessageProcess = {
+  errorMessage: string | null;
+};
+
+export type ReviewsProcess = {
+  reviews: Reviews;
+  reviewsIsLoading: boolean;
+  reviewsIsNotFound: boolean;
+};
+
+export type OfferProcess = {
+  offer: Offer | null;
+  offerIsLoading: boolean;
+  offerIsNotFound: boolean;
+};
+
+export type OffersNearbyProcess = {
+  offersNearby: Offers;
+  offersNearbyIsLoading: boolean;
+  offersNearbyIsNotFound: boolean;
+};
+
+export type OffersProcess = {
+  cityActive: string;
+  city: City;
+  sortType: SortType;
+  allOffers: Offers;
+  offers: Offers;
+  offersIsLoading: boolean;
+  offersIsNotFound: boolean;
+};
+
+export type favoritesProcess = {
+  favorites: Offers;
+  favoritesIsLoading: boolean;
+  favoritesIsNotFound: boolean;
+};
 export type City = {
     name: string;
     location: Location;
@@ -17,8 +60,18 @@ export type Host = {
     isPro: boolean;
     avatarUrl: string;
   };
+import { FavoritesTriggerUpdate } from '../const/const';
 
-
+export type FavoriteData = {
+    offerId: string;
+    status: number;
+    triggerUpdate: FavoritesTriggerUpdate;
+  };
+export type CommentData = {
+    id: string;
+    comment: string;
+    rating: number;
+  };
 export type Location = {
     latitude: number;
     longitude: number;
@@ -63,7 +116,8 @@ export type User = {
     isPro: boolean;
     name: string;
   };
-export type Reviews = Review[];
+
+
 export type Offers = Offer[];
 export type Card = 'cities' | 'favorite' | 'offers';
 
@@ -80,5 +134,5 @@ export type Point = {
 }
 
 export type State = ReturnType<typeof store.getState>;
-
+export type Reviews = Review[];
 export type AppDispatch = typeof store.dispatch;

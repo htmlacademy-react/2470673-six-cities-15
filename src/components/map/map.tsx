@@ -4,18 +4,17 @@ import { Marker, layerGroup } from 'leaflet';
 import { useRef, useEffect } from 'react';
 
 import useMap from '../hooks/use-map';
-import { CityMap } from '../types/types';
-import { URL_MARKER_DEFAULT,URL_MARKER_CURRENT } from '../const/const';
+import { City } from '../types/types';
+import { URL_MARKER_CURRENT,URL_MARKER_DEFAULT } from '../const/const';
 
 import { Offer,Offers } from '../types/types';
 
 type MapProps = {
   mapType: 'cities' | 'offer';
-  city: CityMap;
+  city: City;
   offers: Offers;
   cardHoverId: Offer['id'] | null;
 }
-
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: URL_MARKER_DEFAULT,
@@ -38,27 +37,28 @@ function Mappage({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer, index) => {
-        const marker = new Marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longitude
-        });
-
-        if(mapType === 'offer') {
-          marker
-            .setIcon(
-              index === 0
-                ? currentCustomIcon
-                : defaultCustomIcon
-            )
-            .addTo(markerLayer);
-        } else {
-          marker
-            .setIcon(
-              cardHoverId !== undefined && offer.id === cardHoverId
-                ? currentCustomIcon
-                : defaultCustomIcon
-            )
-            .addTo(markerLayer);
+        if (offer) {
+          const marker = new Marker({
+            lat: offer.location.latitude,
+            lng: offer.location.longitude
+          });
+          if(mapType === 'offer') {
+            marker
+              .setIcon(
+                index === 0
+                  ? currentCustomIcon
+                  : defaultCustomIcon
+              )
+              .addTo(markerLayer);
+          } else {
+            marker
+              .setIcon(
+                cardHoverId !== undefined && offer.id === cardHoverId
+                  ? currentCustomIcon
+                  : defaultCustomIcon
+              )
+              .addTo(markerLayer);
+          }
         }
       });
 
@@ -70,7 +70,7 @@ function Mappage({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
-      map.setView([city.lat, city.lng], city.zoom);
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
     }
   }, [map, city]);
 
@@ -91,6 +91,5 @@ function Mappage({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
     </section>
   );
 }
-
 
 export default Mappage;

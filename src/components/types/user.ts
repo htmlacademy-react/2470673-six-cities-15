@@ -1,4 +1,4 @@
-import { UserData } from "./types";
+import { UserData } from './types';
 
 export type UserConnect = UserData & {
     avatarUrl: string;
