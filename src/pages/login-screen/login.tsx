@@ -1,19 +1,25 @@
 import {useRef, FormEvent} from 'react';
-import {useNavigate} from 'react-router-dom';
+import { setCityActive,setChangeMap } from '../../components/store/action';
 import { useAppDispatch } from '../../components/hooks/reduxIndex';
 import { loginAction } from '../../components/store/api-actions';
-import { AppRoutes } from '../../components/const/const';
-
+import { AppRoutes, cityMap } from '../../components/const/const';
+import { Link } from 'react-router-dom';
 function LoginPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
+  const cityButton = 'Amsterdam';
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
+  function onCityButton (city:string) {
+    const [cityMapActive] = cityMap.filter((item) => item.title === city);
+
+    dispatch(setCityActive(city));
+    dispatch(setChangeMap(cityMapActive));
+  }
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
+   
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
         login: loginRef.current.value,
@@ -64,7 +70,6 @@ function LoginPage(): JSX.Element {
                 />
               </div>
               <button
-                onClick={() => navigate(AppRoutes.Main)}
                 className="login__submit form__submit button"
                 type="submit"
               >
@@ -75,15 +80,16 @@ function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a
+            <Link
                 className="locations__item-link"
-                href="#"
+                onClick={() =>
+                  onCityButton(cityButton)}
+                to={AppRoutes.Main}
               >
                 <span>
-                  Amsterdam
+                  {cityButton}
                 </span>
-
-              </a>
+              </Link>
             </div>
           </section>
         </div>
