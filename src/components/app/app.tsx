@@ -7,7 +7,7 @@ import NotFoundPage from '../../pages/notfound/notfound';
 import Layout from '../layout/layout';
 import PrivateRoute from '../privateRoute';
 import FavoritesPage from '../../pages/favourites-screen/fauvorites';
-import { Offers, Reviews } from '../types/types';
+import { Offers } from '../types/types';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { useAppSelector} from '../hooks/reduxIndex';
 import { AuthorizationStatuss } from '../const/const';
@@ -16,13 +16,12 @@ import HistoryRouter from '../../hist-route/history-route';
 import browserHistory from '../../browser-hist';
 type AppPageProps={
   offers: Offers;
-  nearbyOffers: Offers;
-  reviews: Reviews;
+
   citiesList: string[];
 }
 
 
-function App({offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
+function App({offers,citiesList,}:AppPageProps):JSX.Element{
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.offersIsLoading);
 
@@ -61,11 +60,7 @@ function App({offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
           <Route
             path={AppRoutes.Offer}
             element={
-              <OfferPage offers = {offers} reviews = {reviews} nearbyOffers ={nearbyOffers}
-                onReview={(rating, comment) => {
-                  console.log(rating, comment);
-                }}
-              />
+              <OfferPage></OfferPage>
             }
           />
           <Route

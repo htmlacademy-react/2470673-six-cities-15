@@ -19,7 +19,7 @@ function LoginPage(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-   
+
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
         login: loginRef.current.value,
@@ -80,7 +80,7 @@ function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-            <Link
+              <Link
                 className="locations__item-link"
                 onClick={() =>
                   onCityButton(cityButton)}

@@ -18,7 +18,11 @@ export type Host = {
     avatarUrl: string;
   };
 
-
+export type CommentData = {
+    id: string;
+    comment: string;
+    rating: number;
+  };
 export type Location = {
     latitude: number;
     longitude: number;

@@ -8,38 +8,62 @@ import {setCityActive,
   requireAuthorization,
   setOffersIsLoading,
   setError,
-  setUser} from './action';
+  setUser,
+  loadOffer,
+  setOfferIsLoading,
+  addReviews,
+  setOfferIsNotFound,
+  loadNearPlaces,
+  setNearPlacesIsLoading,
+  setNearPlacesIsNotFound} from './action';
 import { DEFAULT_CITY,defaultLocation, SortType, AuthorizationStatuss } from '../const/const';
 import { UserConnect } from '../types/user';
 import { offersSorting } from '../utils/offerSorting';
-import { Offers } from '../types/types';
+import { Offers,Offer } from '../types/types';
 import { CityMap } from '../types/types';
+
+import { Reviews } from '../types/types';
 
 type InitalState = {
   cityActive: string;
   allOffers: Offers;
   offers: Offers;
+  offer: Offer | null;
   offersIsLoading: boolean;
+  offerIsLoading: boolean;
+  offerIsNotFound: boolean;
+  nearPlaces: Offers;
+  nearPlacesIsLoading: boolean;
+  nearPlacesIsNotFound: boolean;
   city: CityMap;
   sortType: SortType;
   authorizationStatus: AuthorizationStatuss;
-  error: string | null,
   user: UserConnect | null;
+  reviews: Reviews;
+  error: string | null;
 
 }
+
 const initialState: InitalState = {
   cityActive: DEFAULT_CITY,
   allOffers: [],
   offers: [],
+  offer: null,
   offersIsLoading: false,
+  offerIsLoading: false,
+  offerIsNotFound: false,
+  nearPlaces: [],
+  nearPlacesIsLoading: false,
+  nearPlacesIsNotFound: false,
   city: defaultLocation,
   sortType: SortType.Popular,
   authorizationStatus: AuthorizationStatuss.Unknown,
   user: null,
+  reviews: [],
   error: null,
 };
 
-export const reducer = createReducer(initialState, (builder) => {
+const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setCityActive, (state, action) => {
       state.cityActive = action.payload;
@@ -57,6 +81,7 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(getSortType, (state, action) => {
       state.sortType = action.payload;
     })
+
     .addCase(setChangeMap, (state, action) => {
       state.city = action.payload;
     })
@@ -66,7 +91,11 @@ export const reducer = createReducer(initialState, (builder) => {
     })
 
     .addCase(loadOffers, (state, action) => {
-      state.offers = action.payload;
+      state.allOffers = action.payload;
+    })
+
+    .addCase(loadOffer, (state, action) => {
+      state.offer = action.payload;
     })
 
     .addCase(requireAuthorization, (state, action) => {
@@ -77,10 +106,37 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offersIsLoading = action.payload;
     })
 
+    .addCase(setOfferIsLoading, (state, action) => {
+      state.offerIsLoading = action.payload;
+    })
+
     .addCase(setError, (state, action) => {
       state.error = action.payload;
     })
+
     .addCase(setUser, (state, action) => {
       state.user = action.payload;
+    })
+
+    .addCase(addReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+
+    .addCase(loadNearPlaces, (state, action) => {
+      state.nearPlaces = action.payload;
+    })
+
+    .addCase(setOfferIsNotFound, (state, action) => {
+      state.offerIsNotFound = action.payload;
+    })
+
+    .addCase(setNearPlacesIsLoading, (state, action) => {
+      state.nearPlacesIsLoading = action.payload;
+    })
+
+    .addCase(setNearPlacesIsNotFound, (state, action) => {
+      state.nearPlacesIsNotFound = action.payload;
     });
 });
+
+export {reducer};
