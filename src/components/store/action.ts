@@ -1,7 +1,8 @@
 import {createAction} from '@reduxjs/toolkit';
 import { CityMap } from '../types/types';
-import { SortType,AuthorizationStatuss } from '../const/const';
+import { SortType,AuthorizationStatuss,AppRoutes,NameSpace } from '../const/const';
 import { Offers } from '../types/types';
+import { UserConnect } from '../types/user';
 
 export const setCityActive = createAction('main/CityActive', (value: string)=>({payload: value}));
 
@@ -20,3 +21,6 @@ export const setOffersIsLoading = createAction<boolean>('setOffersIsLoading');
 export const requireAuthorization = createAction<AuthorizationStatuss>('user/requireAuthorization');
 
 export const setError = createAction<string | null>('setError');
+export const redirectToRoute = createAction<AppRoutes>('main/redirectToRoute');
+
+export const setUser = createAction<UserConnect | null>(`${NameSpace.User}/setUser`);

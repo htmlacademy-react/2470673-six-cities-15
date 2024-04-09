@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes,Route } from 'react-router-dom';
+import { Routes,Route } from 'react-router-dom';
 import MainPage from '../../pages/main-screen/main';
 import { AppRoutes } from '../const/const';
 import LoginPage from '../../pages/login-screen/login';
@@ -12,6 +12,8 @@ import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { useAppSelector} from '../hooks/reduxIndex';
 import { AuthorizationStatuss } from '../const/const';
 import Spinner from '../spinner/spinner';
+import HistoryRouter from '../../hist-route/history-route';
+import browserHistory from '../../browser-hist';
 type AppPageProps={
   offers: Offers;
   nearbyOffers: Offers;
@@ -32,7 +34,7 @@ function App({offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
   }
 
   return(
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <ScrollToTop></ScrollToTop>
       <Routes>
         <Route path={AppRoutes.Main} element={<Layout></Layout>}>
@@ -73,7 +75,7 @@ function App({offers,nearbyOffers,citiesList,reviews}:AppPageProps):JSX.Element{
 
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 export default App;

@@ -38,6 +38,17 @@ export const citiesList = [CITY_LIST.Paris, CITY_LIST.Cologne, CITY_LIST.Brussel
 
 export const DEFAULT_CITY = CITY_LIST.Paris;
 
+export const PRIVATE_ROUTES: readonly string[] = ['/favorites'];
+
+export enum NameSpace {
+  Offers = 'OFFERS',
+  Favorites = 'FAVORITES',
+  Reviews = 'REVIEWS',
+  User = 'USER',
+  Data = 'DATA',
+  Error = 'ERROR'
+}
+
 export const cityMap: CityMap[] = [
   {
     title: 'Amsterdam',
