@@ -12,3 +12,4 @@ function ErrorMessage(): JSX.Element | null {
 }
 
 export default ErrorMessage;
+

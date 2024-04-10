@@ -3,13 +3,13 @@ import { Card } from '../types/types';
 import { Offers } from '../types/types';
 
 
-type GeneralCardListProps = {
+type CardMainlistProps = {
   elementType: Card;
   offers: Offers;
   setActivePlaceCard?: (id: string | null) => void;
 }
 
-function CardMainList({ elementType, setActivePlaceCard, offers }: GeneralCardListProps) {
+function CardMainlist({ elementType, setActivePlaceCard, offers }: CardMainlistProps) {
   return (
     <>
       {
@@ -26,4 +26,4 @@ function CardMainList({ elementType, setActivePlaceCard, offers }: GeneralCardLi
   );
 }
 
-export default CardMainList;
+export default CardMainlist;

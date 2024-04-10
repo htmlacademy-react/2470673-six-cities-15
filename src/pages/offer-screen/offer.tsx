@@ -12,7 +12,7 @@ import { getOffersNearby, getOffersNearbyIsLoading } from '../../components/stor
 import { getOffer, getOfferIsLoading, getOfferIsNotFound } from '../../components/store/offer-process/selector.ts';
 import { getReviews } from '../../components/store/review-process/selectors.ts';
 import { AppRoutes } from '../../components/const/const.tsx';
-
+import OfferNameWrapper from '../../components/offer/offer.tsx';
 const DEFAULT_BEGIN = 0;
 const MAX_IMAGES_SHOW = 6;
 const NEAR_PLACES_COUNT = 3;
@@ -35,7 +35,6 @@ function OfferPage(): JSX.Element {
   const offerIsNotFound = useAppSelector(getOfferIsNotFound);
   const nearbyOffers = useAppSelector(getOffersNearby);
   const nearbyOffersIsLoading = useAppSelector(getOffersNearbyIsLoading);
-
 
   const [nearbyCardHoverId, setNearbyCardHoverId] = useState<string | null>(null);
 
@@ -77,17 +76,7 @@ function OfferPage(): JSX.Element {
                     <span>Premium</span>
                   </div>
                   : ''}
-                <div className="offer__name-wrapper">
-                  <h1 className="offer__name">
-                    {offerActive.title}
-                  </h1>
-                  <button className="offer__bookmark-button button" type="button">
-                    <svg className={`offer__bookmark-icon ${offerActive.isFavorite ? 'offer__bookmark-button--active' : ''}`} width={31} height={33}>
-                      <use xlinkHref="#icon-bookmark" />
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
-                </div>
+                <OfferNameWrapper cardId = {cardId} offerActive = {offerActive} />
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">
                     <span style={{ width: '80%' }} />
@@ -166,7 +155,7 @@ function OfferPage(): JSX.Element {
             </h2>
             <div className="near-places__list places__list">
               {!nearbyOffersIsLoading && (
-                <CardMainList elementType={'offers'} offers = {activeNearbyOffers} setActivePlaceCard = {handleCardHover}/>
+                <CardMainList elementType='offers' offers = {activeNearbyOffers} setActivePlaceCard = {handleCardHover}/>
               )}
             </div>
           </section>

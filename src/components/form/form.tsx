@@ -1,16 +1,12 @@
 import {useState, ChangeEvent, Fragment, FormEvent} from 'react';
-import { getAuthorizationStatus } from '../authorizationStatus';
-import {AuthorizationStatuss } from '../const/const';
-import {useAppDispatch} from '../hooks/reduxIndex';
+import {useAppDispatch,useAppSelector} from '../hooks/reduxIndex';
 import { submitReviewAction } from '../store/api-actions';
+import { getReviewsIsLoading, getReviewsIsNotSubmit } from '../store/review-process/selectors';
 type FormProps = {
-  offerId?:string;
+  offerId?: string;
 };
 
 function Form({offerId}: FormProps): JSX.Element {
-  const [comment, setComment] = useState('');
-  const [rating, setRating] = useState('0');
-
   const ratingMap = {
     'perfect': '5',
     'good': '4',
@@ -18,14 +14,23 @@ function Form({offerId}: FormProps): JSX.Element {
     'badly': '2',
     'terribly': '1'
   };
-  const authorizationStatus = getAuthorizationStatus();
+
   const dispatch = useAppDispatch();
+  const reviewsIsNotSubmit = useAppSelector(getReviewsIsNotSubmit);
+  const ReviewsIsLoading = useAppSelector(getReviewsIsLoading);
+  const [comment, setComment] = useState('');
+  const [rating, setRating] = useState('0');
 
+  const isDisabled = ((comment.length < 50 || comment.length > 300) || rating === '0' || ReviewsIsLoading);
 
-  const isDisabled = (comment.length < 50 || comment.length > 300 || rating === null);
   function handleInputChange(evt: ChangeEvent<HTMLInputElement>) {
     setRating(evt.target.value);
   }
+
+  function handleTextAreaChange(evt: ChangeEvent<HTMLTextAreaElement>) {
+    setComment(evt.target.value);
+  }
+
   const resetForm = () => {
     setComment('');
     setRating('0');
@@ -42,79 +47,68 @@ function Form({offerId}: FormProps): JSX.Element {
           rating: Number(rating),
         })
       );
-
+    }
+    if (!reviewsIsNotSubmit) {
       resetForm();
     }
   };
 
-  function handleTextAreaChange(evt: ChangeEvent<HTMLTextAreaElement>) {
-    setComment(evt.target.value);
-  }
-
   return (
-
     <form className="reviews__form form" action="#" method="post"
       onSubmit={handleSubmit}
     >
-
-      {authorizationStatus === AuthorizationStatuss.Auth ? (
-
-        <div>
-          <label className="reviews__label form__label" htmlFor="review">
+      <label className="reviews__label form__label" htmlFor="review">
         Your review
-          </label>
-          <div className="reviews__rating-form form__rating">
-            {
-              Object.entries(ratingMap).map(([title, score]) => (
-                <Fragment key={score}>
-                  <input
-                    className="form__rating-input visually-hidden"
-                    name="rating"
-                    value={score}
-                    id={`${score}-stars`}
-                    type="radio"
-                    checked={rating === score}
-                    onChange={handleInputChange}
-                  />
-                  <label
-                    htmlFor={`${score}-stars`}
-                    className="reviews__rating-label form__rating-label"
-                    title={title}
-                  >
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"></use>
-                    </svg>
-                  </label>
-                </Fragment>
-              ))
-            }
-          </div>
-          <textarea
-            className="reviews__textarea form__textarea"
-            id="review"
-            name="review"
-            placeholder="Tell how was your stay, what you like and what can be improved"
-            value={comment}
-            onChange={handleTextAreaChange}
-          />
-          <div className="reviews__button-wrapper">
-            <p className="reviews__help">
+      </label>
+      <div className="reviews__rating-form form__rating">
+        {
+          Object.entries(ratingMap).map(([title, score]) => (
+            <Fragment key={score}>
+              <input
+                className="form__rating-input visually-hidden"
+                name="rating"
+                value={score}
+                id={`${score}-stars`}
+                type="radio"
+                checked={rating === score}
+                onChange={handleInputChange}
+              />
+              <label
+                htmlFor={`${score}-stars`}
+                className="reviews__rating-label form__rating-label"
+                title={title}
+              >
+                <svg className="form__star-image" width="37" height="33">
+                  <use xlinkHref="#icon-star"></use>
+                </svg>
+              </label>
+            </Fragment>
+          ))
+        }
+      </div>
+      <textarea
+        className="reviews__textarea form__textarea"
+        id="review"
+        name="review"
+        placeholder="Tell how was your stay, what you like and what can be improved"
+        value={comment}
+        onChange={handleTextAreaChange}
+      />
+      <div className="reviews__button-wrapper">
+        <p className="reviews__help">
           To submit review please make sure to set{''}
-              <span className="reviews__star">rating</span> and describe
+          <span className="reviews__star">rating</span> and describe
             your stay with at least{''}
-              <b className="reviews__text-amount">50 characters</b>.
-            </p>
-            <button
-              className="reviews__submit form__submit button"
-              type="submit"
-              disabled = {isDisabled}
-            >
+          <b className="reviews__text-amount">50 characters</b>.
+        </p>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled = {isDisabled}
+        >
           Submit
-            </button>
-          </div>
-        </div>
-      ) : null}
-
+        </button>
+      </div>
     </form>
   );
 }
