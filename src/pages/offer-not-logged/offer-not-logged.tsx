@@ -1,4 +1,3 @@
-
 function OfferNotLoggedPage(): JSX.Element {
   return (
     <div className="page">

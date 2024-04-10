@@ -1,5 +1,5 @@
 import {useRef, FormEvent} from 'react';
-import { setCityActive,setChangeMap } from '../../components/store/offers-process/offers-process';
+import { setCityActive,setChangeMap,setOffers } from '../../components/store/offers-process/offers-process';
 import { useAppDispatch } from '../../components/hooks/reduxIndex';
 import { loginAction } from '../../components/store/api-actions';
 import { AppRoutes } from '../../components/const/const';
@@ -12,6 +12,7 @@ function LoginPage(): JSX.Element {
 
   function onCityButton (city:string) {
     dispatch(setCityActive(city));
+    dispatch(setOffers());
     dispatch(setChangeMap());
   }
 
@@ -29,8 +30,6 @@ function LoginPage(): JSX.Element {
 
   return (
     <div className="page page--gray page--login">
-
-
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -51,6 +50,7 @@ function LoginPage(): JSX.Element {
                   ref={loginRef}
                   className="login__input form__input"
                   name="email"
+                  title="Email, for example test@test.com"
                   placeholder="Email"
                   required
                   type="email"
@@ -64,6 +64,7 @@ function LoginPage(): JSX.Element {
                   ref={passwordRef}
                   className="login__input form__input"
                   name="password"
+                  title="The password must contain at least one digit or letter"
                   placeholder="Password"
                   required
                   type="password"
@@ -75,7 +76,6 @@ function LoginPage(): JSX.Element {
               >
                 Sign in
               </button>
-
             </form>
           </section>
           <section className="locations locations--login locations--current">
@@ -99,4 +99,3 @@ function LoginPage(): JSX.Element {
 }
 
 export default LoginPage;
-

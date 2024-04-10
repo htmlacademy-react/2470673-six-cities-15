@@ -5,6 +5,7 @@ import { Review } from '../types/types';
 type ReviewProps = {
   reviewItem: Review;
 }
+
 function ReviewItem({reviewItem}: ReviewProps): JSX.Element {
   const {comment, user, rating, date} = reviewItem;
   const {name, avatarUrl} = user;

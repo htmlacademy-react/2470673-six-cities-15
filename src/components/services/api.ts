@@ -3,9 +3,9 @@ import {getToken} from './token';
 import {StatusCodes} from 'http-status-codes';
 import { processErrorHandle } from './error-handle';
 type DetailMessageType = {
-    type: string;
-    message: string;
-  }
+  type: string;
+  message: string;
+}
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,

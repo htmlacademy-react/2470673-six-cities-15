@@ -14,6 +14,7 @@ export type ReviewsProcess = {
   reviews: Reviews;
   reviewsIsLoading: boolean;
   reviewsIsNotFound: boolean;
+  reviewsIsNotSubmit: boolean;
 };
 
 export type OfferProcess = {
@@ -21,7 +22,10 @@ export type OfferProcess = {
   offerIsLoading: boolean;
   offerIsNotFound: boolean;
 };
-
+export type LocationItems = {
+  city: string;
+  list: Offers;
+};
 export type OffersNearbyProcess = {
   offersNearby: Offers;
   offersNearbyIsLoading: boolean;

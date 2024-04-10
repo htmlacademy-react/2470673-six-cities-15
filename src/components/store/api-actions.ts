@@ -4,7 +4,6 @@ import { AppDispatch,FavoriteData,State } from '../types/types';
 import { Offers,Offer } from '../types/types';
 import { Reviews,Review } from '../types/types';
 import { CommentData } from '../types/types';
-
 import {saveToken, dropToken} from '../services/token';
 import { AuthData } from '../types/types';
 import {UserConnect} from '../types/user';
@@ -13,6 +12,7 @@ import { redirectToRoute } from './action';
 import { setFavoriteOffers } from './offers-process/offers-process';
 import { setFavoriteOffer } from './offer-process/offer-process';
 import { setFavoriteNearby } from './offer-nearby-process/offers-nearby-process';
+import { setIsNotSubmit } from './review-process/review-process';
 
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
@@ -112,15 +112,21 @@ export const submitReviewAction = createAsyncThunk<
       state: State;
       extra: AxiosInstance;
     }
-  >('submitComment', async ({id, comment, rating}, {extra: api}) => {
-    const { data } = await api.post<Review>(`${ApiRoute.Comments}/${id}`, {
-      comment: comment,
-      rating: rating,
-    });
+  >('submitComment',
+    async ({id, comment, rating}, {dispatch, extra: api}) => {
+      try {
+        const {data} = await api.post<Review>(`${ApiRoute.Comments}/${id}`, {
+          comment: comment,
+          rating: rating,
+        });
 
-    return data;
-  }
-  );
+        dispatch(setIsNotSubmit(false));
+        return data;
+      } catch (error) {
+        dispatch(setIsNotSubmit(true));
+        throw new Error();
+      }
+    });
 
 export const fetchFavoritesAction = createAsyncThunk<
   Offers,
@@ -155,9 +161,14 @@ export const setFavoritesAction = createAsyncThunk<
       break;
     case FavoritesTriggerUpdate.Offer:
       dispatch(setFavoriteOffer(data.isFavorite));
+      dispatch(setFavoriteOffers(data));
+      dispatch(setFavoriteNearby(data));
       break;
     case FavoritesTriggerUpdate.Favorites:
       dispatch(fetchFavoritesAction());
+      dispatch(setFavoriteOffers(data));
+      dispatch(setFavoriteOffer(data.isFavorite));
+      dispatch(setFavoriteNearby(data));
       break;
     case FavoritesTriggerUpdate.Nearby:
       dispatch(setFavoriteNearby(data));

@@ -1,37 +1,39 @@
 import {Link} from 'react-router-dom';
 import { Offer } from '../types/types';
-import {useState} from 'react';
 import { Card } from '../types/types';
+import { FavoritesTriggerUpdate } from '../const/const';
+import { useFavorites } from '../hooks/useFavourite';
 
-type GeneralCardProps = {
+type CardMainProps = {
   elementType: Card;
   offer: Offer;
   setActivePlaceCard?: (id: string | null) => void;
 }
 
-function CardMain({elementType, setActivePlaceCard, offer}: GeneralCardProps): JSX.Element {
+function CardMain({elementType, setActivePlaceCard, offer}: CardMainProps): JSX.Element {
   const options = {
     cities: {
       className: 'cities',
       width: '260',
       height: '200',
-      url: 'offer/'
+      url: 'offer/',
+      triggerUpdate: FavoritesTriggerUpdate.Offers
     },
     favorite: {
       className: 'favorites',
       width: '150',
       height: '110',
-      url: '/offer/'
+      url: '/offer/',
+      triggerUpdate: FavoritesTriggerUpdate.Favorites
     },
     offers: {
       className: 'near-places',
       width: '260',
       height: '200',
-      url: '/offer/'
+      url: '/offer/',
+      triggerUpdate: FavoritesTriggerUpdate.Nearby
     }
   };
-
-  const [isFavoriteCard, setIsFavoriteCard] = useState(offer.isFavorite);
 
   function handleMouseEnter() {
     setActivePlaceCard?.(offer.id);
@@ -40,6 +42,15 @@ function CardMain({elementType, setActivePlaceCard, offer}: GeneralCardProps): J
   function handleMouseLeave() {
     setActivePlaceCard?.(null);
   }
+
+  const currentStatus = offer.isFavorite ? 0 : 1;
+
+  const onChangeFavorites = useFavorites(
+    String(offer.id),
+    currentStatus,
+    options[elementType].triggerUpdate
+  );
+
   return (
     <article className={`${options[elementType].className}__card place-card`}
       onMouseEnter={handleMouseEnter}
@@ -63,8 +74,8 @@ function CardMain({elementType, setActivePlaceCard, offer}: GeneralCardProps): J
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button onClick = {() => setIsFavoriteCard(!isFavoriteCard)}
-            className={`place-card__bookmark-button ${isFavoriteCard ? 'place-card__bookmark-button--active' : ''} ${elementType === 'favorite' ? 'place-card__bookmark-button--active' : ''} button`}
+          <button onClick={onChangeFavorites}
+            className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
