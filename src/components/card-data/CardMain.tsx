@@ -20,6 +20,7 @@ function CardMain({elementType, setActivePlaceCard, offer}: CardMainProps): JSX.
       triggerUpdate: FavoritesTriggerUpdate.Offers
     },
     favorite: {
+      
       className: 'favorites',
       width: '150',
       height: '110',
