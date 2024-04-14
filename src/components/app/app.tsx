@@ -25,38 +25,27 @@ function App():JSX.Element{
   }
 
   return(
-    <><ScrollToTop></ScrollToTop><Routes>
-      <Route path={AppRoutes.Main} element={<Layout></Layout>}>
+      <Routes>
+      <ScrollToTop/>
 
-
-        <Route
-          index
-          element={<MainPage />}
-        />
-        <Route
-          path={AppRoutes.Favorites}
-          element={<PrivateRoute
-            authorizationStatus={authorizationStatus}
-          >
-            <FavoritesPage />
-          </PrivateRoute>}
-        />
-        <Route
-          path={AppRoutes.Login}
-          element={<LoginPage />}
-        />
-        <Route
-          path={AppRoutes.Offer}
-          element={<OfferPage></OfferPage>}
-        />
-        <Route
-          path="*"
-          element={<NotFoundPage />}
-        />
-
-      </Route>
-    </Routes>
-    </>
+        <Route path={AppRoutes.Main} element={<Layout></Layout>}>
+          <Route
+            index
+            element={<MainPage />}
+          />
+          <Route
+            path={AppRoutes.Favorites}
+            element=
+              {<PrivateRoute
+                authorizationStatus={authorizationStatus}
+              ><FavoritesPage />
+              </PrivateRoute>}
+          />
+          <Route path={AppRoutes.Login}element={<LoginPage />}/>
+          <Route path={AppRoutes.Offer} element={<OfferPage></OfferPage>}/>
+          <Route path="*" element={<NotFoundPage />}/>
+        </Route>
+      </Routes>
   );
 }
 export default App;

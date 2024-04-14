@@ -1,20 +1,20 @@
-import {AxiosInstance} from 'axios';
-import {createAsyncThunk} from '@reduxjs/toolkit';
-import { ThunkApiConfig } from '../types/thunk';
-import { AppDispatch, State } from '../types/state';
-import { redirectToRoute } from './action';
-import {saveToken, dropToken} from '../services/token';
-import { ApiRoute,AppRoutes } from '../components/const/const';
-import {UserConnect} from '../types/user';
-import {setFavoriteOffers} from './offers-process/offers-process';
-import {setFavoriteOffer} from './offer-process/offer-process';
-import { setFavoriteNearby } from './offer-nearby-process/offers-nearby-process';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AxiosInstance } from 'axios';
+import { State } from '../types/state';
+import { ApiRoute, AppRoutes } from '../components/const/const';
+import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/authData';
 import { CommentData } from '../types/comments';
 import { FavoriteData } from '../types/favoutites';
 import { Offers, Offer } from '../types/offer';
 import { Reviews, Review } from '../types/rewiew';
-
+import { AppDispatch } from '../types/state';
+import { ThunkApiConfig } from '../types/thunk';
+import { UserConnect } from '../types/user';
+import { redirectToRoute } from './action';
+import { setFavoriteNearby } from './offer-nearby-process/offers-nearby-process';
+import { setFavoriteOffer } from './offer-process/offer-process';
+import { setFavoriteOffers } from './offers-process/offers-process';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, ThunkApiConfig>
 ('fetchOffers',async (_arg, {extra: api}) => {
@@ -75,7 +75,6 @@ export const fetchReviewsAction = createAsyncThunk<
   ('fetchReviews', async (_arg, {extra: api}) => {
     const id = _arg;
     const {data} = await api.get<Reviews>(`${ApiRoute.Comments}/${id}`);
-
     return data;
   });
 

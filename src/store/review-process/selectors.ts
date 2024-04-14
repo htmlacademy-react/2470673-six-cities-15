@@ -1,7 +1,6 @@
-import { NameSpace } from '../../components/const/const';
-import { RequestStatus } from '../../components/const/const';
+import { NameSpace, RequestStatus } from '../../components/const/const';
 import { Reviews } from '../../types/rewiew';
-import { State } from '../../types/state';
+import {State} from '../../types/state';
 
 export const getReviews = (state: Pick<State, NameSpace.Reviews>): Reviews =>
   state[NameSpace.Reviews].reviews;

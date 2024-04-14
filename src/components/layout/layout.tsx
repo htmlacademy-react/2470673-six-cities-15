@@ -1,5 +1,5 @@
 import {NavLink, Link, Outlet} from 'react-router-dom';
-import styles from './layout.module.css';
+import style from './layout.module.css';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { AppRoutes, AuthorizationStatuss } from '../const/const';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxIndex';
@@ -53,11 +53,11 @@ function Layout(): JSX.Element {
                       <span className="header__favorite-count">{favoriteCardsLength.toString()}</span>
                     </NavLink>
                   </li>
-                  <li className={`header__nav-link ${styles.resetStyleButton}`}>
-                    <button className="header__nav-link"
+                  <li className={'header__nav-item user'}>
+                    <button className={`header__nav-link  ${style.resetStyleButton}`}
                       onClick={handleClick}
                     >
-                      <span className="header__signout">Sign out</span>
+                      <span className="header__login" style={{color:'black'}}>Sign out</span>
                     </button>
                   </li>
                 </ul>

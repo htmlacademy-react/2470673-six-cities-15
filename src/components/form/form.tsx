@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxIndex';
 import { submitReviewAction, fetchReviewsAction } from '../../store/api-actions';
 import { assignReviewRequestStatusByDefault } from '../../store/review-process/review-process';
 import { getReviewsIsLoading, selectReviewRequestStatus } from '../../store/review-process/selectors';
+import { useParams } from 'react-router-dom';
 
 
 type FormProps = {
@@ -39,7 +40,7 @@ function Form({offerId}: FormProps): JSX.Element {
     setComment('');
     setRating('0');
   };
-
+  const params = useParams();
   useEffect(() => {
     if(reviewRequestStatus === RequestStatus.Success) {
       resetForm();
@@ -57,7 +58,7 @@ function Form({offerId}: FormProps): JSX.Element {
           rating: Number(rating),
         })
       );
-      dispatch(fetchReviewsAction());
+      dispatch(fetchReviewsAction(params.id));
     }
   };
 
