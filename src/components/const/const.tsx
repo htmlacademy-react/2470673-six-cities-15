@@ -1,21 +1,28 @@
-import { CityList, City } from '../types/types';
+import { City, CityList } from '../../types/City';
 
-export const Setting = {
-  PlacesCount:312
-};
-export enum AppRoutes{
-  Layout='/layout',
-  Main='/',
-  Login='/login',
-  Offer='/offer/:id',
-  Favorites='/favorites',
+export const PRIVATE_ROUTES: readonly string[] = ['/favorites'];
+
+export enum AppRoutes {
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id',
+  Main = '/',
   NotFound = '*'
 }
-export enum AuthorizationStatuss{
-  Auth='Auth',
-  NoAuth='NoAuth',
-  Unknown='Unknown'
+
+export enum AuthorizationStatuss {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
 }
+
+export const URL_MARKER_DEFAULT =
+  'img/pin.svg';
+
+export const URL_MARKER_CURRENT =
+  'img/pin-active.svg';
+
+export const handleStars = (rating: number): string => `${(Math.round(rating) * 100 / 5)}%`;
 export const DEFAULT_LOCATION: City = {
   name: 'Paris',
   location: {
@@ -25,16 +32,7 @@ export const DEFAULT_LOCATION: City = {
   }
 } as const;
 
-export const handleStars = (width: number) => `${String(Math.round(width) * 20)}%`;
-
-export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-
-export const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
-
-
-export const CITY_LIST: CityList = {
+export const CityName: CityList = {
   Paris: 'Paris',
   Cologne: 'Cologne',
   Brussels: 'Brussels',
@@ -43,29 +41,18 @@ export const CITY_LIST: CityList = {
   Dusseldorf: 'Dusseldorf',
 } as const;
 
-export const citiesList = [CITY_LIST.Paris, CITY_LIST.Cologne, CITY_LIST.Brussels, CITY_LIST.Amsterdam, CITY_LIST.Hamburg, CITY_LIST.Dusseldorf];
+export const CITIES_LIST = [CityName.Paris, CityName.Cologne, CityName.Brussels, CityName.Amsterdam, CityName.Hamburg, CityName.Dusseldorf];
 
-export const DEFAULT_CITY = CITY_LIST.Paris;
+export const DEFAULT_CITY = CityName.Paris;
 
-export const PRIVATE_ROUTES: readonly string[] = ['/favorites'];
-
-export enum NameSpace {
-  Offer = 'OFFER',
-  OffersNearby = 'OFFERSNEARBY',
-  ErrorMessage = 'ERRORMESSAGE',
-  Favorites = 'FAVORITES',
-  User = 'USER',
-  Reviews = 'REVIEWS',
-  Offers = 'OFFERS',
+export enum SortType {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRated = 'Top rated first',
 }
 
-
-export enum FavoritesTriggerUpdate {
-  Offers = 'UpdateOffers',
-  Offer = 'UpdateOffer',
-  Favorites = 'UpdateFavorites',
-  Nearby = 'UpdateNearby',
-}
+export const DEFAULT_SORT = SortType.Popular;
 
 export enum ApiRoute {
   Offers = '/offers',
@@ -74,11 +61,37 @@ export enum ApiRoute {
   Login = '/login',
   Logout = '/logout'
 }
-export enum SortType {
-  Popular = 'Popular',
-  LowToHigh = 'Price: low to high',
-  HighToLow = 'Price: high to low',
-  TopRated = 'Top rated first',
-}
+
 export const TIMEOUT_SHOW_ERROR = 2000;
-export const DEFAULT_SORT = SortType.Popular;
+
+export enum NameSpace {
+  User = 'USER',
+  Offers = 'OFFERS',
+  Offer = 'OFFER',
+  Reviews = 'REVIEWS',
+  OffersNearby = 'OFFERSNEARBY',
+  ErrorMessage = 'ERRORMESSAGE',
+  Favorites = 'FAVORITES'
+}
+
+export enum FavoritesTriggerUpdate {
+  Offers = 'UpdateOffers',
+  Offer = 'UpdateOffer',
+  Favorites = 'UpdateFavorites',
+  Nearby = 'UpdateNearby',
+}
+
+export const getRandomInteger = (a: number, b: number): number => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
+};
+
+export enum RequestStatus {
+  Idle = 'idle',
+  Pending = 'pending',
+  Success = 'success',
+  Error = 'error',
+}

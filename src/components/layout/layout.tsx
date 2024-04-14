@@ -1,30 +1,25 @@
-import {NavLink, Link, useNavigate, useLocation, Outlet} from 'react-router-dom';
-import { useAppSelector,useAppDispatch } from '../hooks/reduxIndex';
-import { AuthorizationStatuss,AppRoutes,PRIVATE_ROUTES } from '../const/const';
+import {NavLink, Link, Outlet} from 'react-router-dom';
 import styles from './layout.module.css';
-import { logoutAction } from '../store/api-actions';
 import { getAuthorizationStatus } from '../authorizationStatus';
-import { getFavorites } from '../store/fauvorite-process/selectors';
-import { getUser } from '../store/user-process/selectors';
+import { AppRoutes, AuthorizationStatuss } from '../const/const';
+import { useAppSelector, useAppDispatch } from '../../hooks/reduxIndex';
+import { logoutAction } from '../../store/api-actions';
+import { getFavoritesLength } from '../../store/fauvorite-process/selectors';
+import { getUser } from '../../store/user-process/selectors';
+import { assignauthorizationStatusByDefault } from '../../store/user-process/user-process';
 
-function Layout():JSX.Element{
+function Layout(): JSX.Element {
   const authorizationStatusActive = useAppSelector(getAuthorizationStatus);
-  const user = useAppSelector(getUser);
-  const favoriteCardsLength = useAppSelector(getFavorites).length;
+  const userConnect = useAppSelector(getUser);
+  const favoriteCardsLength = useAppSelector(getFavoritesLength);
   const isLogged = authorizationStatusActive === AuthorizationStatuss.Auth;
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const {pathname} = useLocation();
 
   const handleClick = () => {
     dispatch(logoutAction());
-
-    if (PRIVATE_ROUTES.includes(pathname)) {
-      navigate(AppRoutes.Main);
-    }
+    dispatch(assignauthorizationStatusByDefault());
   };
   return(
-
     <>
       <header className='header'>
         <div className='container'>
@@ -47,15 +42,15 @@ function Layout():JSX.Element{
                     <NavLink
                       className="header__nav-link header__nav-link--profile"
                       to={AppRoutes.Favorites}
+                      data-testid="header-link"
                     >
-                      <div className="header__avatar-wrapper user__avatar-wrapper"
-                        style={{ backgroundImage: user?.avatarUrl }}
-                      >
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                        <img src={userConnect?.avatarUrl} />
                       </div>
                       <span className="header__user-name user__name">
-                        {user?.email}
+                        {userConnect?.email}
                       </span>
-                      <span className="header__favorite-count">{favoriteCardsLength}</span>
+                      <span className="header__favorite-count">{favoriteCardsLength.toString()}</span>
                     </NavLink>
                   </li>
                   <li className={`header__nav-link ${styles.resetStyleButton}`}>
@@ -74,7 +69,6 @@ function Layout():JSX.Element{
                     <Link
                       className="header__nav-link header__nav-link--profile"
                       to={AppRoutes.Login}
-                      state={{ from: pathname }}
                     >
                       <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                       <span className="header__login">Sign in</span>

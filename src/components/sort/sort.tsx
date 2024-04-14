@@ -1,8 +1,10 @@
 import {useState} from 'react';
-import { useAppDispatch,useAppSelector } from '../hooks/reduxIndex';
+import { useAppDispatch,useAppSelector } from '../../hooks/reduxIndex';
 import { SortType } from '../const/const';
-import { getSortType } from '../store/offers-process/selectors';
-import { setSortType,setOffers } from '../store/offers-process/offers-process';
+import { getSortType } from '../../store/offers-process/selectors';
+import { setSortType } from '../../store/offers-process/offers-process';
+import classNames from 'classnames';
+
 
 function Sort(): JSX.Element {
   const [opened, setOpened] = useState<boolean>(false);
@@ -15,7 +17,6 @@ function Sort(): JSX.Element {
 
   function handleChangeSorting(item: SortType) {
     dispatch(setSortType(item));
-    dispatch(setOffers());
     setOpened(false);
   }
 
@@ -28,10 +29,12 @@ function Sort(): JSX.Element {
           <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${opened ? 'places__options--opened' : ''}`}>
+      <ul
+        className={classNames('places__options', 'places__options--custom', {'places__options--opened' : opened})}
+      >
         {Object.values(SortType).map((item) => (
           <li key={item}
-            className={`places__option ${activeSortType === item ? 'places__option--active' : ''}`}
+            className={classNames('places__option', {'places__option--active' : activeSortType === item})}
             tabIndex={0}
             onClick={() => handleChangeSorting(item)}
           >

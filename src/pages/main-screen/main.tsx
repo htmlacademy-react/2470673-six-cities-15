@@ -1,47 +1,55 @@
 import {useState} from 'react';
-import { useAppSelector } from '../../components/hooks/reduxIndex.ts';
+import { useAppSelector } from '../../hooks/reduxIndex.ts';
 import Map from '../../components/map/map';
 import CardMainList from '../../components/cardMainList/card-main-list';
 import Locations from '../../components/locations/locations.tsx';
 import Sort from '../../components/sort/sort.tsx';
-import { getCity, getCityActive, getOffers, getOffersIsLoading, getOffersIsNotFound } from '../../components/store/offers-process/selectors.ts';
+import { getCityActive, getOffersByCityAndSort, getOffersIsLoading, getOffersIsNotFound } from '../../store/offers-process/selectors.ts';
 import Spinner from '../../components/spinner/spinner.tsx';
 import { Navigate } from 'react-router-dom';
 import MainEmpty from '../../components/main-empty/main-empty.tsx';
 import { AppRoutes } from '../../components/const/const.tsx';
+import classNames from 'classnames';
 
 
 function MainPage(): JSX.Element {
   const [cardHoverId, setCardHoverId] = useState<string | null>(null);
   const cityActive = useAppSelector(getCityActive);
-  const offers = useAppSelector(getOffers);
-  const cityMapActive = useAppSelector(getCity);
+  const offers = useAppSelector(getOffersByCityAndSort);
+  const cityMapActive = offers[0]?.city;
   const placesCount = offers.length;
-
   const offersIsLoading = useAppSelector(getOffersIsLoading);
   const offersIsNotFound = useAppSelector(getOffersIsNotFound);
+  const isEmpty = offersIsNotFound || !placesCount;
 
   return (
-    <div className="page page--gray page--main">
+    <div className={classNames('page', 'page--gray', 'page--main', {'page__main--index-empty' : isEmpty})} data-testid="main-page">
+
+      <header className="header">
+        <div className="container">
+          <div className="header__wrapper">
+            <div className="header__left">
+            </div>
+          </div>
+        </div>
+      </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <Locations />
         {offersIsLoading && <Spinner />}
         {offersIsNotFound && <Navigate to={AppRoutes.NotFound} />}
         {!offersIsLoading && (
-          <div className="cities">
+          <div className="cities" data-testid="cities-container">
             {placesCount ? (
               <div className="cities__places-container container">
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">{placesCount} places to stay in {cityActive}</b>
+                  <b className="places__found">{placesCount} {placesCount === 1 ? 'place' : 'places'} to stay in {cityActive}</b>
                   <Sort />
-                  <div className="cities__places-list places__list tabs__content">
-                    <CardMainList elementType='cities' offers = {offers} setActivePlaceCard = {setCardHoverId}/>
-                  </div>
+                  <CardMainList elementType='cities' offers = {offers} setActivePlaceCard = {setCardHoverId}/>
                 </section>
-                <div className="cities__right-section">
-                  <Map mapType='cities' offers={offers} cardHoverId={cardHoverId} city={cityMapActive}/>
+                <div className="cities__right-section" data-testid="map-container">
+                  {cityMapActive && (<Map mapType='cities' offers={offers} cardHoverId={cardHoverId} city={cityMapActive}/>)}
                 </div>
               </div>
             ) : (

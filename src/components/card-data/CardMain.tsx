@@ -1,38 +1,36 @@
-import {Link} from 'react-router-dom';
-import { Offer } from '../types/types';
-import { Card } from '../types/types';
-import { FavoritesTriggerUpdate } from '../const/const';
-import { useFavorites } from '../hooks/useFavourite';
 
-type CardMainProps = {
+import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { handleStars } from '../const/const';
+import { useFavorites } from '../../hooks/useFavourite';
+import { Card } from '../../types/card';
+import { Offer } from '../../types/offer';
+
+type GeneralCardProps = {
   elementType: Card;
   offer: Offer;
   setActivePlaceCard?: (id: string | null) => void;
 }
 
-function CardMain({elementType, setActivePlaceCard, offer}: CardMainProps): JSX.Element {
+function GeneralCard({elementType, setActivePlaceCard, offer}: GeneralCardProps): JSX.Element {
   const options = {
     cities: {
       className: 'cities',
       width: '260',
       height: '200',
       url: 'offer/',
-      triggerUpdate: FavoritesTriggerUpdate.Offers
     },
     favorite: {
-      
       className: 'favorites',
       width: '150',
       height: '110',
       url: '/offer/',
-      triggerUpdate: FavoritesTriggerUpdate.Favorites
     },
     offers: {
       className: 'near-places',
       width: '260',
       height: '200',
       url: '/offer/',
-      triggerUpdate: FavoritesTriggerUpdate.Nearby
     }
   };
 
@@ -46,16 +44,16 @@ function CardMain({elementType, setActivePlaceCard, offer}: CardMainProps): JSX.
 
   const currentStatus = offer.isFavorite ? 0 : 1;
 
-  const onChangeFavorites = useFavorites(
+  const handleChangeFavorites = useFavorites(
     String(offer.id),
-    currentStatus,
-    options[elementType].triggerUpdate
+    currentStatus
   );
 
   return (
     <article className={`${options[elementType].className}__card place-card`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      data-testid="card-container"
     >
       {
         offer.isPremium &&
@@ -66,17 +64,18 @@ function CardMain({elementType, setActivePlaceCard, offer}: CardMainProps): JSX.
 
       <div className={`${options[elementType].className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${options[elementType].url}${offer.id}`}>
-          <img className="place-card__image" src={offer.previewImage} width={options[elementType].width} height={options[elementType].height} alt="Place image" />
+          <img className="place-card__image" src={offer.previewImage} width={options[elementType].width} height={options[elementType].height} alt="Place image" data-testid="card-lazy-image" />
         </Link>
       </div>
       <div className={`${elementType === 'favorite' ? 'favorites__card-info ' : ''}'place-card__info'`}>
         <div className="place-card__price-wrapper">
-          <div className="place-card__price">
+          <div className="place-card__price" data-testid="card-price-container">
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button onClick={onChangeFavorites}
-            className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+          <button onClick={handleChangeFavorites}
+
+            className={classNames('place-card__bookmark-button','button', {'place-card__bookmark-button--active' :  offer.isFavorite})}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -85,19 +84,19 @@ function CardMain({elementType, setActivePlaceCard, offer}: CardMainProps): JSX.
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
+        <div className="place-card__rating rating" data-testid="starline-container">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${offer.rating / 5 * 100}%` }}></span>
+            <span style={{width: `${handleStars(offer.rating)}`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
+        <h2 className="place-card__name" data-testid="card-name-title">
           <Link to={`${options[elementType].url}${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type" data-testid="card-type-paragraph">{offer.type}</p>
       </div>
     </article>
   );
 }
 
-export default CardMain;
+export default GeneralCard;

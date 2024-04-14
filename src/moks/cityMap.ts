@@ -1,4 +1,4 @@
-import { CityMap } from '../components/types/types';
+import { CityMap } from '../types/cityMap';
 
 
 const city: CityMap = {

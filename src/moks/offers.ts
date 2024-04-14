@@ -1,4 +1,4 @@
-import { Offers } from '../components/types/types';
+import { Offers } from '../types/offer';
 export const offers: Offers = [
   {
     id: '1',
