@@ -1,9 +1,12 @@
-import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../hooks/reduxIndex';
-import { setChangeMap, setCityActive, setOffers } from '../store/offers-process/offers-process';
+
+import {Link} from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/reduxIndex';
+import { setCityActive } from '../../store/offers-process/offers-process';
+import { Card } from '../../types/card';
+import { Offers } from '../../types/offer';
 import CardMain from '../card-data/CardMain';
-import { Card, Offers } from '../types/types';
 import { AppRoutes } from '../const/const';
+
 
 type FavoritesCardListProps = {
   city: string;
@@ -15,10 +18,8 @@ function FavoritesCardList({city, list, elementType}: FavoritesCardListProps) {
 
   const dispatch = useAppDispatch();
 
-  function onCityButton (cityActive:string) {
+  function handleCityButton (cityActive:string) {
     dispatch(setCityActive(cityActive));
-    dispatch(setOffers());
-    dispatch(setChangeMap());
   }
 
   return (
@@ -26,7 +27,7 @@ function FavoritesCardList({city, list, elementType}: FavoritesCardListProps) {
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           {city && (
-            <Link className="locations__item-link" to={AppRoutes.Main} onClick={() => onCityButton(city)}>
+            <Link className="locations__item-link" to={AppRoutes.Main} onClick={() => handleCityButton(city)}>
               <span>{city}</span>
             </Link>
           )}

@@ -1,7 +1,13 @@
-import {useState, ChangeEvent, Fragment, FormEvent} from 'react';
-import {useAppDispatch,useAppSelector} from '../hooks/reduxIndex';
-import { submitReviewAction } from '../store/api-actions';
-import { getReviewsIsLoading, getReviewsIsNotSubmit } from '../store/review-process/selectors';
+import { useState, ChangeEvent, useEffect, FormEvent } from 'react';
+import { Fragment } from 'react/jsx-runtime';
+import { RequestStatus } from '../const/const';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxIndex';
+import { submitReviewAction, fetchReviewsAction } from '../../store/api-actions';
+import { assignReviewRequestStatusByDefault } from '../../store/review-process/review-process';
+import { getReviewsIsLoading, selectReviewRequestStatus } from '../../store/review-process/selectors';
+import { useParams } from 'react-router-dom';
+
+
 type FormProps = {
   offerId?: string;
 };
@@ -16,13 +22,12 @@ function Form({offerId}: FormProps): JSX.Element {
   };
 
   const dispatch = useAppDispatch();
-  const reviewsIsNotSubmit = useAppSelector(getReviewsIsNotSubmit);
-  const ReviewsIsLoading = useAppSelector(getReviewsIsLoading);
+  const reviewsIsLoading = useAppSelector(getReviewsIsLoading);
+  const reviewRequestStatus = useAppSelector(selectReviewRequestStatus);
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('0');
 
-  const isDisabled = ((comment.length < 50 || comment.length > 300) || rating === '0' || ReviewsIsLoading);
-
+  const isDisabled = ((comment.length < 50 || comment.length > 300) || reviewsIsLoading);
   function handleInputChange(evt: ChangeEvent<HTMLInputElement>) {
     setRating(evt.target.value);
   }
@@ -35,10 +40,16 @@ function Form({offerId}: FormProps): JSX.Element {
     setComment('');
     setRating('0');
   };
+  const params = useParams();
+  useEffect(() => {
+    if(reviewRequestStatus === RequestStatus.Success) {
+      resetForm();
+      dispatch(assignReviewRequestStatusByDefault());
+    }
+  }, [reviewRequestStatus, dispatch]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (offerId && !isDisabled) {
       dispatch(
         submitReviewAction({
@@ -47,15 +58,14 @@ function Form({offerId}: FormProps): JSX.Element {
           rating: Number(rating),
         })
       );
-    }
-    if (!reviewsIsNotSubmit) {
-      resetForm();
+      dispatch(fetchReviewsAction(params.id));
     }
   };
 
   return (
     <form className="reviews__form form" action="#" method="post"
       onSubmit={handleSubmit}
+      data-testid="review-form-container"
     >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
@@ -72,6 +82,8 @@ function Form({offerId}: FormProps): JSX.Element {
                 type="radio"
                 checked={rating === score}
                 onChange={handleInputChange}
+                disabled = {reviewsIsLoading}
+                data-testid={`rating-form-item-${score}`}
               />
               <label
                 htmlFor={`${score}-stars`}
@@ -93,6 +105,7 @@ function Form({offerId}: FormProps): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment}
         onChange={handleTextAreaChange}
+        disabled = {reviewsIsLoading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -105,6 +118,7 @@ function Form({offerId}: FormProps): JSX.Element {
           className="reviews__submit form__submit button"
           type="submit"
           disabled = {isDisabled}
+          data-testid="submit-button"
         >
           Submit
         </button>

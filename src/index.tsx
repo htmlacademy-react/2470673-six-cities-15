@@ -2,13 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import App from './components/app/app';
-import { store } from './components/store';
-import ErrorMessage from './components/error-msg/error-msg';
-import { fetchOffersAction,checkAuthAction,fetchFavoritesAction} from './components/store/api-actions';
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from 'react-toastify';
+import { store } from './store';
+import { fetchOffersAction,checkAuthAction } from './store/api-actions';
+import HistoryRouter from './components/hist-route/history-route';
+import browserHistory from './browser-hist';
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
-store.dispatch(fetchFavoritesAction());
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -16,8 +19,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <ErrorMessage />
-      <App/>
+      <HistoryRouter history={browserHistory}>
+        <ToastContainer autoClose = {2000}/>
+        <App />
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>,
 );

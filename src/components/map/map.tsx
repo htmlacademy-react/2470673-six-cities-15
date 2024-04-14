@@ -1,19 +1,18 @@
 import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
-import { Marker, layerGroup } from 'leaflet';
-import { useRef, useEffect } from 'react';
+import {Marker, layerGroup} from 'leaflet';
+import {useRef, useEffect, memo} from 'react';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../const/const';
+import useMap from '../../hooks/use-map';
+import { City } from '../../types/City';
+import { Offers, Offer } from '../../types/offer';
 
-import useMap from '../hooks/use-map';
-import { City } from '../types/types';
-import { URL_MARKER_CURRENT,URL_MARKER_DEFAULT } from '../const/const';
-
-import { Offer,Offers } from '../types/types';
 
 type MapProps = {
   mapType: 'cities' | 'offer';
   city: City;
   offers: Offers;
-  cardHoverId: Offer['id'] | null;
+  cardHoverId?: Offer['id'] | null;
 }
 
 const defaultCustomIcon = leaflet.icon({
@@ -29,7 +28,7 @@ const currentCustomIcon = leaflet.icon({
 });
 
 
-function Mappage({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
+function Map({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -72,7 +71,7 @@ function Mappage({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
     if (map) {
       map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
     }
-  }, [map, city]);
+  }, [map, city, offers, mapType]);
 
   return (
     <section
@@ -84,12 +83,15 @@ function Mappage({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
           minWidth: '1144px',
           margin: '0, auto'
         }
-        : {height: '500px'}}
+        : {height: '100%',
+          minHeight: '500px',}}
       className={`${mapType}__map map`}
       ref={mapRef}
+      data-testid="map-section"
     >
     </section>
   );
 }
 
-export default Mappage;
+const MemorizedMap = memo(Map);
+export default MemorizedMap;
