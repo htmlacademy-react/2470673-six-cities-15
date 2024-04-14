@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import {FormEvent, useState, ChangeEvent} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useEffect} from 'react';
-import { getAuthorizationStatus } from '../../components/authorizationStatus';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { AppRoutes, AuthorizationStatuss, CITIES_LIST, getRandomInteger } from '../../components/const/const';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxIndex';
 import { loginAction } from '../../store/api-actions';

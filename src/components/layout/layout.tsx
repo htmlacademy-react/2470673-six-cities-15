@@ -1,6 +1,6 @@
 import {NavLink, Link, Outlet} from 'react-router-dom';
 import styles from './layout.module.css';
-import { getAuthorizationStatus } from '../authorizationStatus';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { AppRoutes, AuthorizationStatuss } from '../const/const';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxIndex';
 import { logoutAction } from '../../store/api-actions';

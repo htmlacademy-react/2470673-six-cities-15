@@ -1,7 +1,8 @@
-import axios, {AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
-import {getToken} from './token';
-import {StatusCodes} from 'http-status-codes';
-import {toast} from 'react-toastify';
+import axios, { AxiosResponse, AxiosInstance, InternalAxiosRequestConfig, AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
+import { toast } from "react-toastify";
+import { getToken } from "./token";
+
 
 type DetailMessageType = {
   type: string;
@@ -43,6 +44,7 @@ export const createAPI = (): AxiosInstance => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.response.data);
         toast.warn(`Server Error: ${detailMessage.message}`, {
+          
         });
       }
 

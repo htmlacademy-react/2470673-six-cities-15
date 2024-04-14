@@ -1,5 +1,5 @@
 import {useNavigate} from 'react-router';
-import { getAuthorizationStatus } from '../components/authorizationStatus';
+import { getAuthorizationStatus } from '../store/user-process/selectors';
 import { setFavoritesAction } from '../store/api-actions';
 import { useAppDispatch, useAppSelector } from './reduxIndex';
 import { AppRoutes, AuthorizationStatuss } from '../components/const/const';

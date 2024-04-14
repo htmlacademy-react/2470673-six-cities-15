@@ -11,7 +11,7 @@ import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { useAppSelector} from '../../hooks/reduxIndex';
 import { AuthorizationStatuss } from '../const/const';
 import Spinner from '../spinner/spinner';
-import { getAuthorizationStatus } from '../authorizationStatus';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getOffersIsLoading } from '../../store/offers-process/selectors';
 
 function App():JSX.Element{

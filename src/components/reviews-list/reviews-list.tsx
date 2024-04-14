@@ -2,7 +2,7 @@ import Form from '../form/form';
 import ReviewItem from '../review-item/reviewItem.tsx';
 import { useAppSelector } from '../../hooks/reduxIndex.ts';
 import { AuthorizationStatuss } from '../const/const.tsx';
-import { getAuthorizationStatus } from '../authorizationStatus.tsx';
+import { getAuthorizationStatus } from '../../store/user-process/selectors.ts';
 import {useMemo, memo} from 'react';
 import { Reviews } from '../../types/rewiew.ts';
 

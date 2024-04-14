@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import { getAuthorizationStatus } from '../../components/authorizationStatus';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import FavoritesEmpty from '../../components/favourites-empty/favourites-empty';
 import Favorites from '../../components/favourites/favourites';
 import { useAppSelector, useAppDispatch } from '../../hooks/reduxIndex';
