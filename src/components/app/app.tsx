@@ -17,7 +17,7 @@ import { useEffect } from 'react';
 import { fetchFavoritesAction } from '../../store/api-actions';
 
 function App():JSX.Element{
-  const dispatch =useAppDispatch()
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersDataLoading = useAppSelector(getOffersIsLoading);
 

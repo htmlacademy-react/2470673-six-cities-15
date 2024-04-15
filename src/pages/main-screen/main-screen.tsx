@@ -9,7 +9,6 @@ import { Navigate } from 'react-router-dom';
 import MainEmpty from '../../components/main-empty/main-empty.tsx';
 import { AppRoutes } from '../../const.tsx';
 import classNames from 'classnames';
-import React from 'react';
 import { useAppSelector } from '../../hooks/index.ts';
 
 
@@ -25,7 +24,7 @@ function MainPage(): JSX.Element {
 
   return (
     <div className={classNames('page', 'page--gray', 'page--main', {'page__main--index-empty' : isEmpty})} data-testid="main-page">
-     
+
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <Locations />

@@ -88,11 +88,11 @@ function OfferPage(): JSX.Element {
                 <ul className="offer__features" data-testid="features-container">
                   <li className="offer__feature offer__feature--entire">{offerActive.type.charAt(0).toUpperCase() + offerActive.type.slice(1) }</li>
                   <li className="offer__feature offer__feature--bedrooms">
-                  {offerActive.bedrooms} 
+                    {offerActive.bedrooms}
                     {
                       offerActive.bedrooms > 1 ? ' Bedrooms' : ' Bedroom'
                     }
-              
+
                   </li>
                   <li className="offer__feature offer__feature--adults">
                     Max {offerActive.maxAdults}    {

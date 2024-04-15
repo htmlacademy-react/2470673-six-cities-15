@@ -14,8 +14,8 @@ import { assignauthorizationStatusByDefault } from './store/user-process/user-pr
 const token = getToken();
 
 if (token !== '') {
-store.dispatch(checkAuthAction());
- 
+  store.dispatch(checkAuthAction());
+
 } else {
   store.dispatch(assignauthorizationStatusByDefault());
 }

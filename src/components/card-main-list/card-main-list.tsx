@@ -4,7 +4,6 @@ import { Card } from '../../types/card';
 import { Offers } from '../../types/offer';
 
 
-
 type CardMainListProps = {
   elementType: Card;
   offers: Offers;

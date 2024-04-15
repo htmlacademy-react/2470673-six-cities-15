@@ -4,7 +4,6 @@ import {fetchFavoritesAction, setFavoritesAction} from '../api-actions';
 import { favoritesProcess } from '../../types/state';
 
 
-
 const initialState: favoritesProcess = {
   favorites: [],
   favoritesIsLoading: false,
