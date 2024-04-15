@@ -1,8 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { NameSpace } from '../../components/const/const';
+import { NameSpace } from '../../const';
 import {fetchOffersNearbyAction} from '../api-actions';
 import { Offer } from '../../types/offer';
 import { OffersNearbyProcess } from '../../types/state';
+
 
 const initialState: OffersNearbyProcess = {
   offersNearby: [],

@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { NameSpace,DEFAULT_CITY,DEFAULT_SORT,SortType } from '../../components/const/const';
+import { NameSpace,DEFAULT_CITY,DEFAULT_SORT,SortType } from '../../const';
 import {fetchOffersAction} from '../api-actions';
 import { Offer, Offers } from '../../types/offer';
 import { OffersProcess } from '../../types/state';

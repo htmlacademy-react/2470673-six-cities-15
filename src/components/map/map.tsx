@@ -2,11 +2,12 @@ import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet';
 import {Marker, layerGroup} from 'leaflet';
 import {useRef, useEffect, memo} from 'react';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../const/const';
+
 import useMap from '../../hooks/use-map';
 import { City } from '../../types/City';
-import { Offers, Offer } from '../../types/offer';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const';
 
+import {Offer, Offers} from '../../types/offer';
 
 type MapProps = {
   mapType: 'cities' | 'offer';
@@ -17,13 +18,13 @@ type MapProps = {
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
+  iconSize: [28, 40],
   iconAnchor: [20, 40]
 });
 
 const currentCustomIcon = leaflet.icon({
   iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
+  iconSize: [28, 40],
   iconAnchor: [20, 40]
 });
 
@@ -75,16 +76,6 @@ function Map({mapType, city, offers, cardHoverId}: MapProps): JSX.Element {
 
   return (
     <section
-      style={mapType === 'offer' ?
-        {
-          height: '100%',
-          minHeight: '500px',
-          width: '100%',
-          minWidth: '1144px',
-          margin: '0, auto'
-        }
-        : {height: '100%',
-          minHeight: '500px',}}
       className={`${mapType}__map map`}
       ref={mapRef}
       data-testid="map-section"

@@ -1,10 +1,10 @@
 import {createSelector} from '@reduxjs/toolkit';
-import { NameSpace } from '../../components/const/const';
-import { SortType } from '../../components/const/const';
-import { offersSorting } from '../../utils/offerSorting';
+import { NameSpace } from '../../const';
+import { SortType } from '../../const';
+import { offersSorting } from '../../utils/offer-sorting';
 import { State } from '../../types/state';
 import { Offers } from '../../types/offer';
-import { getOffersByCity } from '../../utils/getOffByCity';
+import { getOffersByCity } from '../../utils/get-off-by-city';
 
 export const getOffers = (state: Pick<State, NameSpace.Offers>): Offers =>
   state[NameSpace.Offers].offers;

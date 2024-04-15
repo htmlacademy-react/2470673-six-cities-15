@@ -1,12 +1,11 @@
 import { useState, ChangeEvent, useEffect, FormEvent } from 'react';
 import { Fragment } from 'react/jsx-runtime';
-import { RequestStatus } from '../const/const';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxIndex';
+import { RequestStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { submitReviewAction, fetchReviewsAction } from '../../store/api-actions';
 import { assignReviewRequestStatusByDefault } from '../../store/review-process/review-process';
 import { getReviewsIsLoading, selectReviewRequestStatus } from '../../store/review-process/selectors';
 import { useParams } from 'react-router-dom';
-
 
 type FormProps = {
   offerId?: string;
@@ -40,7 +39,7 @@ function Form({offerId}: FormProps): JSX.Element {
     setComment('');
     setRating('0');
   };
-  const params = useParams();
+  const params=useParams()
   useEffect(() => {
     if(reviewRequestStatus === RequestStatus.Success) {
       resetForm();

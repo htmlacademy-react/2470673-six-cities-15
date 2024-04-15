@@ -1,6 +1,7 @@
 import { State } from '../../types/state';
-import { NameSpace } from '../../components/const/const';
+import { NameSpace } from '../../const';
 import { Offer } from '../../types/offer';
+
 
 export const getOffer = (state: Pick<State, NameSpace.Offer>): Offer | null =>
   state[NameSpace.Offer].offer;

@@ -1,4 +1,5 @@
-import { City, CityList } from '../../types/City';
+import { City, CityList } from './types/City';
+import { UserConnect } from './types/user';
 
 export const PRIVATE_ROUTES: readonly string[] = ['/favorites'];
 
@@ -17,10 +18,10 @@ export enum AuthorizationStatuss {
 }
 
 export const URL_MARKER_DEFAULT =
-  'img/pin.svg';
+  '../public/img/pin.svg';
 
 export const URL_MARKER_CURRENT =
-  'img/pin-active.svg';
+  '../public/img/pin-active.svg';
 
 export const handleStars = (rating: number): string => `${(Math.round(rating) * 100 / 5)}%`;
 export const DEFAULT_LOCATION: City = {
@@ -95,3 +96,10 @@ export enum RequestStatus {
   Success = 'success',
   Error = 'error',
 }
+export const defaultUser: UserConnect = {
+  name: '',
+  avatarUrl: '',
+  isPro: false,
+  email: '',
+  token: ''
+};

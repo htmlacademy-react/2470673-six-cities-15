@@ -1,11 +1,12 @@
 
 import {Link} from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/reduxIndex';
+import { useAppDispatch } from '../../hooks';
 import { setCityActive } from '../../store/offers-process/offers-process';
 import { Card } from '../../types/card';
 import { Offers } from '../../types/offer';
-import CardMain from '../card-data/CardMain';
-import { AppRoutes } from '../const/const';
+import CardMain from '../card-main/card-main';
+import { AppRoutes } from '../../const';
+
 
 
 type FavoritesCardListProps = {

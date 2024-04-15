@@ -13,10 +13,11 @@ import {CommentData} from '../types/comments';
 import {Location} from '../types/location';
 import {State} from '../types/state';
 import {address} from 'faker/locale/en';
+import {AuthorizationStatuss, DEFAULT_CITY, DEFAULT_SORT} from '../const';
+import {RequestStatus} from '../const';
 import {ThunkDispatch} from 'redux-thunk';
 import {createAPI} from '../services/api';
 import {Action} from 'redux';
-import { AuthorizationStatuss, DEFAULT_CITY, DEFAULT_SORT, RequestStatus } from '../components/const/const';
 import { CityName, City } from '../types/City';
 import { Review, Reviews } from '../types/rewiew';
 

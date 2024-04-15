@@ -1,8 +1,9 @@
 import {useNavigate} from 'react-router';
-import { getAuthorizationStatus } from '../store/user-process/selectors';
-import { setFavoritesAction } from '../store/api-actions';
-import { useAppDispatch, useAppSelector } from './reduxIndex';
-import { AppRoutes, AuthorizationStatuss } from '../components/const/const';
+import {getAuthorizationStatus} from '../store/user-process/selectors';
+
+import {setFavoritesAction} from '../store/api-actions';
+import { AppRoutes, AuthorizationStatuss } from '../const';
+import { useAppDispatch, useAppSelector } from './index';
 
 export const useFavorites = (
   offerId: string,

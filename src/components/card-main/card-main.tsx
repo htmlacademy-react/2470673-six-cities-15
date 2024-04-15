@@ -1,18 +1,18 @@
 
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { handleStars } from '../const/const';
-import { useFavorites } from '../../hooks/useFavourite';
+import { handleStars } from '../../const';
+import { useFavorites } from '../../hooks/use-favourite';
 import { Card } from '../../types/card';
 import { Offer } from '../../types/offer';
 
-type GeneralCardProps = {
+type CardMainProps = {
   elementType: Card;
   offer: Offer;
   setActivePlaceCard?: (id: string | null) => void;
 }
 
-function GeneralCard({elementType, setActivePlaceCard, offer}: GeneralCardProps): JSX.Element {
+function CardMain({elementType, setActivePlaceCard, offer}: CardMainProps): JSX.Element {
   const options = {
     cities: {
       className: 'cities',
@@ -93,10 +93,10 @@ function GeneralCard({elementType, setActivePlaceCard, offer}: GeneralCardProps)
         <h2 className="place-card__name" data-testid="card-name-title">
           <Link to={`${options[elementType].url}${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type" data-testid="card-type-paragraph">{offer.type}</p>
+        <p className="place-card__type" data-testid="card-type-paragraph">{offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}</p>
       </div>
     </article>
   );
 }
 
-export default GeneralCard;
+export default CardMain;

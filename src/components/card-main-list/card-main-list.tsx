@@ -1,16 +1,17 @@
 import { useMemo, memo } from 'react';
-import CardMain from '../card-data/CardMain';
+import CardMain from '../card-main/card-main';
 import { Card } from '../../types/card';
 import { Offers } from '../../types/offer';
 
 
-type GeneralCardListProps = {
+
+type CardMainListProps = {
   elementType: Card;
   offers: Offers;
   setActivePlaceCard?: (id: string | null) => void;
 }
 
-function GeneralCardList({elementType, setActivePlaceCard, offers}: GeneralCardListProps): JSX.Element {
+function CardMainList({elementType, setActivePlaceCard, offers}: CardMainListProps): JSX.Element {
   const className = (type : Card)=>{
     switch(type){
       case 'cities':
@@ -23,6 +24,7 @@ function GeneralCardList({elementType, setActivePlaceCard, offers}: GeneralCardL
   const cards = useMemo(() => offers.map((offer) =>
     (<CardMain key={offer.id} offer={offer} setActivePlaceCard={setActivePlaceCard} elementType={elementType}/>)), [offers, setActivePlaceCard, elementType]);
 
+
   return (
     <div className={className(elementType)}>
       {cards}
@@ -30,5 +32,5 @@ function GeneralCardList({elementType, setActivePlaceCard, offers}: GeneralCardL
   );
 }
 
-const MemorizedGeneralCardList = memo(GeneralCardList);
-export default MemorizedGeneralCardList;
+const MemorizedCardMainList = memo(CardMainList);
+export default MemorizedCardMainList;

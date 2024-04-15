@@ -1,9 +1,9 @@
 import {store} from '../store/index';
-import { AuthorizationStatuss,SortType } from '../components/const/const';
+import { AuthorizationStatuss,SortType } from '../const';
 import { Reviews } from './rewiew';
 import {Offer, Offers} from './offer';
 import {UserConnect} from './user';
-import { RequestStatus } from '../components/const/const';
+import { RequestStatus } from '../const';
 
 
 export type State = ReturnType<typeof store.getState>;

@@ -1,6 +1,6 @@
-import { useFavorites } from '../../hooks/useFavourite';
+import { useFavorites } from '../../hooks/use-favourite';
+import {Offer} from '../../types/offer';
 import classNames from 'classnames';
-import { Offer } from '../../types/offer';
 
 type OfferNameWrapperProps = {
   cardId: string | undefined;

@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { State } from '../types/state';
-import { ApiRoute, AppRoutes } from '../components/const/const';
+import { ApiRoute,AppRoutes } from '../const';
 import { saveToken, dropToken } from '../services/token';
-import { AuthData } from '../types/authData';
+import { AuthData } from '../types/auth-data';
 import { CommentData } from '../types/comments';
 import { FavoriteData } from '../types/favoutites';
 import { Offers, Offer } from '../types/offer';

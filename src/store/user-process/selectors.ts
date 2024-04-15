@@ -1,4 +1,4 @@
-import { NameSpace,AuthorizationStatuss } from '../../components/const/const';
+import { NameSpace,AuthorizationStatuss } from '../../const';
 import { State } from '../../types/state';
 import {UserConnect} from '../../types/user';
 

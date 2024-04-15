@@ -1,8 +1,8 @@
 import Form from '../form/form';
-import ReviewItem from '../review-item/reviewItem.tsx';
-import { useAppSelector } from '../../hooks/reduxIndex.ts';
-import { AuthorizationStatuss } from '../const/const.tsx';
-import { getAuthorizationStatus } from '../../store/user-process/selectors.ts';
+import ReviewItem from '../review-item/review-item';
+import { useAppSelector } from '../../hooks/index.ts';
+import { AuthorizationStatuss } from '../../const.tsx';
+import {getAuthorizationStatus} from '../../store/user-process/selectors';
 import {useMemo, memo} from 'react';
 import { Reviews } from '../../types/rewiew.ts';
 
