@@ -9,7 +9,6 @@ import { Navigate } from 'react-router-dom';
 import MainEmpty from '../../components/main-empty/main-empty.tsx';
 import { AppRoutes } from '../../const.tsx';
 import classNames from 'classnames';
-import React from 'react';
 import { useAppSelector } from '../../hooks/index.ts';
 
 
