@@ -1,6 +1,7 @@
 import { State } from '../../types/state';
-import { NameSpace } from '../../components/const/const';
+import { NameSpace } from '../../const';
 import { Offers } from '../../types/offer';
+
 
 export const getOffersNearby = (state: Pick<State, NameSpace.OffersNearby>): Offers =>
   state[NameSpace.OffersNearby].offersNearby;

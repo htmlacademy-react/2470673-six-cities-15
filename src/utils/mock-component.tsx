@@ -7,8 +7,9 @@ import {createAPI} from '../services/api';
 import thunk from 'redux-thunk';
 import {Action, Store} from 'redux';
 import {Provider} from 'react-redux';
-import HistoryRouter from '../components/hist-route/history-route';
-import { AppThunkDispatch, makeFakeStore } from './fakemocks';
+import React from 'react';
+import HistoryRouter from '../components/history-router/history-route';
+import { AppThunkDispatch, makeFakeStore } from './fake-mocks';
 
 export function withHistory(component: JSX.Element, history?: MemoryHistory) {
   const memoryHistory = history ?? createMemoryHistory();

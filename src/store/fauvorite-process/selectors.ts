@@ -1,5 +1,5 @@
 import { State } from '../../types/state';
-import { NameSpace } from '../../components/const/const';
+import { NameSpace } from '../../const';
 import { Offers } from '../../types/offer';
 
 export const getFavorites = (state: Pick<State, NameSpace.Favorites>): Offers =>

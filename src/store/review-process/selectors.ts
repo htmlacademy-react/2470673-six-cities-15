@@ -1,4 +1,4 @@
-import { NameSpace, RequestStatus } from '../../components/const/const';
+import { NameSpace, RequestStatus } from '../../const';
 import { Reviews } from '../../types/rewiew';
 import {State} from '../../types/state';
 

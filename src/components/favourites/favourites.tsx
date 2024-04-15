@@ -1,12 +1,10 @@
-import FavoritesCardList from '../favourites-card-list/favourite-card-list';
-import { useAppSelector,useAppDispatch } from '../../hooks/reduxIndex';
-import { getFavorites,getFavoritesLength } from '../../store/fauvorite-process/selectors';
-
-import { groupByCityOffers } from '../../utils/groupcitybyoffers';
-import {useEffect} from 'react';
-import { store } from '../../store';
-import { fetchFavoritesAction } from '../../store/api-actions';
-
+import {useAppSelector, useAppDispatch} from '../../hooks/index';
+import React, {useEffect} from 'react';
+import {store} from '../../store';
+import {fetchFavoritesAction} from '../../store/api-actions';
+import { getFavorites, getFavoritesLength } from '../../store/fauvorite-process/selectors';
+import FavoritesCardList from '../favourites-card-list/favourite-card-list'
+import { groupByCityOffers } from '../../utils/group-city-by-offers';
 function Favorites(): JSX.Element {
   const favoriteCards = useAppSelector(getFavorites);
   const favoritesLength = useAppSelector(getFavoritesLength);

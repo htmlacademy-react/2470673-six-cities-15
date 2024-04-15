@@ -1,6 +1,6 @@
-import { handleStars } from '../const/const';
 import { Review } from '../../types/rewiew';
-import { formatDate } from '../../utils/formatDATE';
+import { handleStars } from '../../const';
+import {formatDate} from '../../utils/format-date'
 
 type ReviewProps = {
   reviewItem: Review;

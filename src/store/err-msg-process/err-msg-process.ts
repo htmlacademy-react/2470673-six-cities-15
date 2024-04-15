@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { NameSpace } from '../../components/const/const';
-import { ErrorMessageProcess } from '../../types/state';
+import {NameSpace} from '../../const';
+import {ErrorMessageProcess} from '../../types/state';
 
 const initialState: ErrorMessageProcess = {
   errorMessage: null,

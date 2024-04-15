@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/reduxIndex';
+import { useAppDispatch } from '../../hooks';
 import { setCityActive } from '../../store/offers-process/offers-process';
-import { AppRoutes } from '../../components/const/const';
+import { AppRoutes } from '../../const';
 
 function NotFoundPage(): JSX.Element {
   const cityButton = 'Paris';
@@ -13,15 +13,7 @@ function NotFoundPage(): JSX.Element {
 
   return (
     <div className="page page--gray page--login">
-
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-            </div>
-          </div>
-        </div>
-      </header>
+      
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -51,4 +43,3 @@ function NotFoundPage(): JSX.Element {
 }
 
 export default NotFoundPage;
-

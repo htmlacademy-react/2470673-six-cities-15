@@ -3,11 +3,12 @@ import {FormEvent, useState, ChangeEvent} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useEffect} from 'react';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { AppRoutes, AuthorizationStatuss, CITIES_LIST, getRandomInteger } from '../../components/const/const';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxIndex';
+import { AppRoutes, AuthorizationStatuss, CITIES_LIST, getRandomInteger } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { setCityActive } from '../../store/offers-process/offers-process';
 import { AuthData } from '../../types/authData';
+
 
 const validateEmail = (email: string): boolean =>
   /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i.test(email);
@@ -72,15 +73,6 @@ function LoginPage(): JSX.Element {
 
   return (
     <div className="page page--gray page--login" data-testid="page-login">
-
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-            </div>
-          </div>
-        </div>
-      </header>
       <main className="page__main page__main--login">
         <div className="page__login-container container" data-testid="page-login-container">
           <section className="login">

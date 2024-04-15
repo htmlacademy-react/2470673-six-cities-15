@@ -1,4 +1,4 @@
-import { Offers } from '../types/offer';
+import { Offers } from "../types/offer";
 
 type GroupByCity = {
   [key: string]: Offers;
@@ -19,16 +19,5 @@ export function groupByCityOffers(list: Offers) {
     }
   });
 
-  const resultList = [];
 
-  for (const [key, value] of Object.entries(groupedList)) {
-    const currentItem = {
-      city: key,
-      list: value || null,
-    };
-
-    resultList.push(currentItem);
-  }
-
-  return resultList;
 }

@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { NameSpace } from '../../components/const/const';
+import { NameSpace } from '../../const';
 import {fetchOfferAction} from '../api-actions';
 import { OfferProcess } from '../../types/state';
 

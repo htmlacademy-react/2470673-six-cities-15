@@ -1,9 +1,11 @@
 import {useState} from 'react';
-import { useAppDispatch,useAppSelector } from '../../hooks/reduxIndex';
-import { SortType } from '../const/const';
+import { useAppDispatch,useAppSelector } from '../../hooks';
+import { SortType } from '../../const';
 import { getSortType } from '../../store/offers-process/selectors';
 import { setSortType } from '../../store/offers-process/offers-process';
 import classNames from 'classnames';
+
+
 
 
 function Sort(): JSX.Element {

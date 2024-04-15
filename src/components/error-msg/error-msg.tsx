@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks/reduxIndex';
+import { useAppSelector } from '../../hooks/index';
 import './error-msg-style.css';
 import { getErrorMessage } from '../../store/err-msg-process/selectors';
 

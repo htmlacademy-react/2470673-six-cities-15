@@ -2,17 +2,16 @@ import {useParams, Navigate} from 'react-router-dom';
 import {useEffect} from 'react';
 import Map from '../../components/map/map.tsx';
 import Spinner from '../../components/spinner/spinner.tsx';
-
 import classNames from 'classnames';
-import { AppRoutes, handleStars } from '../../components/const/const';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxIndex.ts';
-import OfferNameWrapper from '../../components/offer-wrapper/offer-wrapper';
-import ReviewsList from '../../components/reviews-list/reviews-list';
+import { AppRoutes, handleStars } from '../../const.tsx';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.ts';
+import OfferNameWrapper from '../../components/offer-wrapper/offer-wrapper.tsx';
+import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
 import { fetchOfferAction, fetchReviewsAction, fetchOffersNearbyAction } from '../../store/api-actions.ts';
 import { getOffersNearby, getOffersNearbyIsLoading } from '../../store/offer-nearby-process/selector.ts';
 import { getOffer, getOfferIsLoading, getOfferIsNotFound } from '../../store/offer-process/selector.ts';
 import { getReviews } from '../../store/review-process/selectors.ts';
-import MemorizedCardMainList from '../../components/cardMainList/card-main-list';
+import CardMainList from '../../components/card-main-list/card-main-list.tsx';
 
 const DEFAULT_BEGIN = 0;
 const MAX_IMAGES_SHOW = 6;
@@ -54,15 +53,6 @@ function OfferPage(): JSX.Element {
 
   return (
     <div className="page">
-
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-            </div>
-          </div>
-        </div>
-      </header>
       <main className="page__main page__main--offer" data-testid="offer-page-container">
         {offerActive && !offerIsNotFound && !offerIsLoading && (
           <section className="offer" data-testid="offer-container">
@@ -96,12 +86,18 @@ function OfferPage(): JSX.Element {
                   <span className="offer__rating-value rating__value">{offerActive.rating}</span>
                 </div>
                 <ul className="offer__features" data-testid="features-container">
-                  <li className="offer__feature offer__feature--entire">{offerActive.type}</li>
+                  <li className="offer__feature offer__feature--entire">{offerActive.type.charAt(0).toUpperCase() + offerActive.type.slice(1) }</li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {offerActive.bedrooms} Bedrooms
+                  {offerActive.bedrooms} 
+                    {
+                      offerActive.bedrooms > 1 ? ' Bedrooms' : ' Bedroom'
+                    }
+              
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offerActive.maxAdults} adults
+                    Max {offerActive.maxAdults}    {
+                      offerActive.maxAdults > 1 ? ' Adults' : ' Adult'
+                    }
                   </li>
                 </ul>
                 <div className="offer__price" data-testid="price-container">
@@ -156,7 +152,7 @@ function OfferPage(): JSX.Element {
               Other places in the neighbourhood
             </h2>
             {!nearbyOffersIsLoading && (
-              <MemorizedCardMainList elementType='offers' offers = {activeNearbyOffers}/>
+              <CardMainList elementType='offers' offers = {activeNearbyOffers}/>
             )}
           </section>
         </div>

@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { AppRoutes, CITIES_LIST } from '../const/const';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxIndex';
+import { AppRoutes, CITIES_LIST } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCityActive } from '../../store/offers-process/offers-process';
 import { getCityActive } from '../../store/offers-process/selectors';
 
-function LocationsList(): JSX.Element {
+function Locations(): JSX.Element {
   const dispatch = useAppDispatch();
   const cityActive = useAppSelector(getCityActive);
 
@@ -35,5 +35,4 @@ function LocationsList(): JSX.Element {
     </div>
   );
 }
-
-export default LocationsList;
+export default Locations

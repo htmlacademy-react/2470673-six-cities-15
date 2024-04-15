@@ -4,9 +4,9 @@ import {Provider} from 'react-redux';
 import App from './components/app/app';
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from 'react-toastify';
-import { store } from './store';
-import { fetchOffersAction,checkAuthAction } from './store/api-actions';
-import HistoryRouter from './components/hist-route/history-route';
+import {store} from './store';
+import {fetchOffersAction, checkAuthAction} from './store/api-actions';
+import HistoryRouter from './components/history-router/history-route';
 import browserHistory from './browser-hist';
 
 store.dispatch(fetchOffersAction());
@@ -25,4 +25,5 @@ root.render(
       </HistoryRouter>
     </Provider>
   </React.StrictMode>,
+
 );

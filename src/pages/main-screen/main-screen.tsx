@@ -1,15 +1,16 @@
 import {useState} from 'react';
-import { useAppSelector } from '../../hooks/reduxIndex.ts';
-import Map from '../../components/map/map';
-import CardMainList from '../../components/cardMainList/card-main-list';
+import Map from '../../components/map/map.tsx';
+import CardMainList from '../../components/card-main-list/card-main-list.tsx';
 import Locations from '../../components/locations/locations.tsx';
 import Sort from '../../components/sort/sort.tsx';
 import { getCityActive, getOffersByCityAndSort, getOffersIsLoading, getOffersIsNotFound } from '../../store/offers-process/selectors.ts';
 import Spinner from '../../components/spinner/spinner.tsx';
 import { Navigate } from 'react-router-dom';
 import MainEmpty from '../../components/main-empty/main-empty.tsx';
-import { AppRoutes } from '../../components/const/const.tsx';
+import { AppRoutes } from '../../const.tsx';
 import classNames from 'classnames';
+import React from 'react';
+import { useAppSelector } from '../../hooks/index.ts';
 
 
 function MainPage(): JSX.Element {
@@ -24,15 +25,7 @@ function MainPage(): JSX.Element {
 
   return (
     <div className={classNames('page', 'page--gray', 'page--main', {'page__main--index-empty' : isEmpty})} data-testid="main-page">
-
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-            </div>
-          </div>
-        </div>
-      </header>
+     
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <Locations />

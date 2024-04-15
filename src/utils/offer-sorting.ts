@@ -1,5 +1,7 @@
 import { Offers } from '../types/offer';
-import { SortType } from '../components/const/const';
+import { SortType } from '../const';
+import { Reviews } from '../types/rewiew';
+
 
 export function offersSorting(type: SortType, list: Offers) {
   switch (type) {
@@ -12,4 +14,8 @@ export function offersSorting(type: SortType, list: Offers) {
     default:
       return list;
   }
+}
+
+export function reviewsSorting(list: Reviews) {
+  return list.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 }
