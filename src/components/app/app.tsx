@@ -8,15 +8,25 @@ import Layout from '../layout/layout';
 import PrivateRoute from '../private-route/private-route';
 import FavoritesPage from '../../pages/favourites-screen/fauvorites-screen';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
-import { useAppSelector} from '../../hooks';
+import { useAppDispatch, useAppSelector} from '../../hooks';
 import { AuthorizationStatuss } from '../../const';
 import Spinner from '../spinner/spinner';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getOffersIsLoading } from '../../store/offers-process/selectors';
+import { useEffect } from 'react';
+import { fetchFavoritesAction } from '../../store/api-actions';
 
 function App():JSX.Element{
+  const dispatch =useAppDispatch()
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersDataLoading = useAppSelector(getOffersIsLoading);
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatuss.Auth) {
+      dispatch(fetchFavoritesAction());
+    }
+
+  }, [dispatch, authorizationStatus]);
 
   if (authorizationStatus === AuthorizationStatuss.Unknown || isOffersDataLoading) {
     return (

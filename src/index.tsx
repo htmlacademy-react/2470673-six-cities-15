@@ -8,9 +8,18 @@ import {store} from './store';
 import {fetchOffersAction, checkAuthAction} from './store/api-actions';
 import HistoryRouter from './components/history-router/history-route';
 import browserHistory from './browser-hist';
+import { getToken } from './services/token';
+import { assignauthorizationStatusByDefault } from './store/user-process/user-process';
 
-store.dispatch(fetchOffersAction());
+const token = getToken();
+
+if (token !== '') {
 store.dispatch(checkAuthAction());
+ 
+} else {
+  store.dispatch(assignauthorizationStatusByDefault());
+}
+store.dispatch(fetchOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

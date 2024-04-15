@@ -1,12 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {checkAuthAction, loginAction, logoutAction} from '../api-actions';
-import { NameSpace,AuthorizationStatuss } from '../../const';
+import { NameSpace,AuthorizationStatuss, defaultUser } from '../../const';
 import { UserProcess } from '../../types/state';
 
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatuss.Unknown,
-  userConnect:  null,
+  userConnect: defaultUser,
 };
 
 export const userSlice = createSlice({
@@ -14,33 +14,30 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     assignauthorizationStatusByDefault: (state) => {
-      state.authorizationStatus = AuthorizationStatuss.Unknown;
-    },
+      state.authorizationStatus = AuthorizationStatuss.NoAuth;
+    }
   },
   extraReducers(builder) {
     builder
-      .addCase(checkAuthAction.fulfilled, (state, {payload}) => {
-        state.authorizationStatus = AuthorizationStatuss.Auth;
-        state.userConnect = payload;
-      })
-      .addCase(checkAuthAction.rejected, (state) => {
-        state.authorizationStatus = AuthorizationStatuss.NoAuth;
-      })
       .addCase(loginAction.fulfilled, (state, action) => {
-        state.userConnect = action.payload;
         state.authorizationStatus = AuthorizationStatuss.Auth;
+        state.userConnect = action.payload;
       })
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatuss.NoAuth;
       })
-      .addCase(logoutAction.fulfilled, (state) => {
+      .addCase(checkAuthAction.fulfilled, (state, action) => {
+        state.authorizationStatus = AuthorizationStatuss.Auth;
+        state.userConnect = action.payload;
+      })
+      .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatuss.NoAuth;
       })
-
-      .addCase(logoutAction.rejected, (state) => {
-        state.authorizationStatus = AuthorizationStatuss.Auth;
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.authorizationStatus = AuthorizationStatuss.NoAuth;
+        state.userConnect = defaultUser;
       });
-  },
+  }
 });
 
-export const {assignauthorizationStatusByDefault} = userSlice.actions;
+export const { assignauthorizationStatusByDefault } = userSlice.actions;

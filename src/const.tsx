@@ -1,4 +1,5 @@
 import { City, CityList } from './types/City';
+import { UserConnect } from './types/user';
 
 export const PRIVATE_ROUTES: readonly string[] = ['/favorites'];
 
@@ -95,3 +96,10 @@ export enum RequestStatus {
   Success = 'success',
   Error = 'error',
 }
+export const defaultUser: UserConnect = {
+  name: '',
+  avatarUrl: '',
+  isPro: false,
+  email: '',
+  token: ''
+};

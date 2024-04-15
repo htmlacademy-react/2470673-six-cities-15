@@ -7,7 +7,7 @@ import { AppRoutes, AuthorizationStatuss, CITIES_LIST, getRandomInteger } from '
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { setCityActive } from '../../store/offers-process/offers-process';
-import { AuthData } from '../../types/authData';
+import { AuthData } from '../../types/auth-data';
 
 
 const validateEmail = (email: string): boolean =>
