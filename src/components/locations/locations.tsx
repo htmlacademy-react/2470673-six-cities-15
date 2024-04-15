@@ -35,4 +35,4 @@ function Locations(): JSX.Element {
     </div>
   );
 }
-export default Locations
+export default Locations;

@@ -39,7 +39,7 @@ function Form({offerId}: FormProps): JSX.Element {
     setComment('');
     setRating('0');
   };
-  const params=useParams()
+  const params = useParams();
   useEffect(() => {
     if(reviewRequestStatus === RequestStatus.Success) {
       resetForm();

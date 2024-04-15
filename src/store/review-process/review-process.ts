@@ -4,7 +4,6 @@ import {fetchReviewsAction, submitReviewAction} from '../api-actions';
 import { RequestStatus, NameSpace } from '../../const';
 
 
-
 const initialState: ReviewsProcess = {
   reviews: [],
   reviewsIsLoading: false,

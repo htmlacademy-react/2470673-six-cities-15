@@ -34,18 +34,18 @@ function FavoritesPage(): JSX.Element {
       {isFavoritesEmpty && <FavoritesEmpty />}
 
       <footer className="footer container">
-          <Link className="footer__logo" to="/">
-                <img
-                  className="footer__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width={64}
-                  height={33}
-                />
-          </Link>
+        <Link className="footer__logo" to="/">
+          <img
+            className="footer__logo"
+            src="img/logo.svg"
+            alt="6 cities logo"
+            width={64}
+            height={33}
+          />
+        </Link>
       </footer>
     </div>
-    
+
   );
 }
 

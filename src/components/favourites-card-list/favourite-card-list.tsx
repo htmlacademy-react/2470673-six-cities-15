@@ -8,7 +8,6 @@ import CardMain from '../card-main/card-main';
 import { AppRoutes } from '../../const';
 
 
-
 type FavoritesCardListProps = {
   city: string;
   list: Offers;

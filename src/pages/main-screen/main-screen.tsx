@@ -25,7 +25,7 @@ function MainPage(): JSX.Element {
 
   return (
     <div className={classNames('page', 'page--gray', 'page--main', {'page__main--index-empty' : isEmpty})} data-testid="main-page">
-     
+
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <Locations />

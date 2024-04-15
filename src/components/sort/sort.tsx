@@ -6,8 +6,6 @@ import { setSortType } from '../../store/offers-process/offers-process';
 import classNames from 'classnames';
 
 
-
-
 function Sort(): JSX.Element {
   const [opened, setOpened] = useState<boolean>(false);
   const activeSortType = useAppSelector(getSortType);
